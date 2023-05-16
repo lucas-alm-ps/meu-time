@@ -122,3 +122,14 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+body * {
+	box-sizing: border-box;
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	background: linear-gradient(296.48deg, #232323 8.27%, #302828 100%);
+}
