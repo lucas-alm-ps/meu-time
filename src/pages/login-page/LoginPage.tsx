@@ -4,23 +4,30 @@ import { StyledPage } from '../../styles/Page';
 import { Instruction } from '../../styles/Instruction';
 import Input from './Input';
 import Button from '../../components/Button';
+import MainPage from '../main-page/MainPage';
+import { useState } from 'react';
 
 export default function LoginPage() {
-	return (
-		<Page>
-			<LeftSide>
-				<MainText>
-					Explore o mundo do futebol em <span>um só lugar</span>
-				</MainText>
-				<Instruction>Insira sua chave da API-Football</Instruction>
-				<Input />
-				<Button text='Entrar' />
-			</LeftSide>
+	const [error, setError] = useState(null);
 
-			<RightSide>
-				<img src={footballPlayer} alt='Football Player' />
-			</RightSide>
-		</Page>
+	return (
+		<MainPage>
+			<Page>
+				<LeftSide>
+					<MainText>
+						Explore o mundo do futebol em <span>um só lugar</span>
+					</MainText>
+					<Instruction>Insira sua chave da API-Football</Instruction>
+					<Input />
+					{error && <ErrorMessage>{error}</ErrorMessage>}
+					<Button text='Entrar' />
+				</LeftSide>
+
+				<RightSide>
+					<img src={footballPlayer} alt='Football Player' />
+				</RightSide>
+			</Page>
+		</MainPage>
 	);
 }
 
@@ -50,4 +57,14 @@ const MainText = styled.h1`
 	span {
 		color: #f5950c;
 	}
+`;
+
+const ErrorMessage = styled.p`
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 23px;
+	margin-top: 15px;
+	color: #f5950c;
 `;
