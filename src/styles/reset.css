@@ -133,3 +133,7 @@ body {
 	height: 100vh;
 	background: linear-gradient(296.48deg, #232323 8.27%, #302828 100%);
 }
+a {
+	color: inherit; /* blue colors for links too */
+	text-decoration: none; /* no underline */
+}

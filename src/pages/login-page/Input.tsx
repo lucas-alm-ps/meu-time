@@ -1,11 +1,11 @@
 import { FaKey as KeyIcon } from 'react-icons/fa';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export default function Input() {
 	const [inputValue, setInputValue] = useState('');
 
-	const handleInputChange = (event: any) => {
+	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(event.target.value);
 	};
 
