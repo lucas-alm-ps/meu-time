@@ -3,6 +3,7 @@ import footballPlayer from '../../assets/football-player.png';
 import { StyledPage } from '../../styles/Page';
 import { Instruction } from '../../styles/Instruction';
 import Input from './Input';
+import Button from '../../components/Button';
 
 export default function LoginPage() {
 	return (
@@ -13,7 +14,9 @@ export default function LoginPage() {
 				</MainText>
 				<Instruction>Insira sua chave da API-Football</Instruction>
 				<Input />
+				<Button text='Entrar' />
 			</LeftSide>
+
 			<RightSide>
 				<img src={footballPlayer} alt='Football Player' />
 			</RightSide>
@@ -30,7 +33,7 @@ const LeftSide = styled.div`
 `;
 
 const RightSide = styled.div`
-	width: 50%;
+	width: 550px;
 `;
 
 const MainText = styled.h1`
