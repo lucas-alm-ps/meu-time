@@ -1,35 +1,63 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-export default function Table() {
+interface TableProps<T> {
+	titles: string[];
+	data: T[];
+	fontSize?: string;
+	columnColors?: string[];
+}
+
+export default function Table<T extends Record<string, unknown>>({
+	titles,
+	data,
+	fontSize,
+	columnColors,
+}: TableProps<T>) {
 	return (
-		<StyledTable>
+		<StyledTable fontSize={fontSize}>
 			<thead>
 				<tr>
-					<th>Nome</th>
-					<th>País</th>
-					<th>Esporte</th>
-					<th>Medalhas</th>
+					{titles.map((title, index) => (
+						<th key={index} className={`column-${index}`}>
+							{title}
+						</th>
+					))}
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Nome</td>
-					<td>País</td>
-					<td>Esporte</td>
-					<td>Medalhas</td>
-				</tr>
-				<tr>
-					<td>Nome</td>
-					<td>País</td>
-					<td>Esporte</td>
-					<td>Medalhas</td>
-				</tr>
+				{data.map((item, index) => (
+					<tr key={index}>
+						{Object.keys(item).map((key, columnIndex) => (
+							<td
+								key={columnIndex}
+								style={{
+									color:
+										columnColors &&
+										columnColors[columnIndex],
+								}}>
+								{key === 'image' ? (
+									<img
+										src={item[key] as string}
+										alt='Player'
+									/>
+								) : (
+									(item[key] as ReactNode)
+								)}
+							</td>
+						))}
+					</tr>
+				))}
 			</tbody>
 		</StyledTable>
 	);
 }
 
-const StyledTable = styled.table`
+interface StyledTableProps {
+	fontSize?: string;
+}
+
+const StyledTable = styled.table<StyledTableProps>`
 	border-collapse: collapse;
 	width: 100%;
 	border-radius: 10px;
@@ -49,6 +77,7 @@ const StyledTable = styled.table`
 	th,
 	td {
 		text-align: left;
+		vertical-align: middle;
 	}
 
 	th {
@@ -65,7 +94,7 @@ const StyledTable = styled.table`
 		font-family: 'Roboto';
 		font-style: normal;
 		font-weight: 400;
-		font-size: 20px;
+		font-size: ${(props) => props.fontSize || '20px'};
 		line-height: 23px;
 		color: #ffffff;
 		padding: 15px 8px;
@@ -79,5 +108,12 @@ const StyledTable = styled.table`
 
 	tbody {
 		background: #464444;
+	}
+
+	img {
+		width: 40px;
+		height: 40px;
+		object-fit: cover;
+		border-radius: 50%;
 	}
 `;
