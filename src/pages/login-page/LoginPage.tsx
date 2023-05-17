@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import footballPlayer from '../../assets/football-player.png';
 import { StyledPage } from '../../styles/Page';
-import { Instruction } from '../../styles/Instruction';
+import { Instruction } from '../../styles/';
 import Input from './Input';
 import Button from '../../components/Button';
 import MainPage from '../main-page/MainPage';

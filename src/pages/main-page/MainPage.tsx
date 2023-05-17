@@ -16,4 +16,5 @@ const Page = styled(StyledPage)`
 	width: 100vw;
 	height: 100vh;
 	flex-direction: column;
+	padding: 45px 85px 0 85px;
 `;

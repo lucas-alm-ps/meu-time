@@ -87,6 +87,8 @@ video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
+a,
+title,
 article,
 aside,
 details,
@@ -124,7 +126,6 @@ table {
 }
 body * {
 	box-sizing: border-box;
-	display: block;
 	transition: all 0.3s ease-in-out;
 }
 

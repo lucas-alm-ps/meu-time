@@ -9,3 +9,12 @@ export const Instruction = styled.h4`
 	color: #ffffff;
 	margin-bottom: 20px;
 `;
+
+export const BoxTitle = styled.h3`
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 40px;
+	line-height: 47px;
+	color: #ffffff;
+`;
