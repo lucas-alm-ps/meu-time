@@ -13,7 +13,18 @@ export default function PlayerTable() {
 	const titles = [' ', 'Nome', 'Idade', 'Nacionalidade', 'Altura', 'Peso'];
 	const columnColors = ['', '#F5950C', '#fff', '#F5950C'];
 
-	const footballPlayers = [
+	const footballPlayers = getPlayersData();
+
+	return (
+		<Table<FootballPlayer>
+			titles={titles}
+			data={footballPlayers}
+			columnColors={columnColors}></Table>
+	);
+}
+
+function getPlayersData() {
+	return [
 		{
 			image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb-9v6iehO3b8igBOrufRG3YPcEiebiNfzdQ&usqp=CAU',
 			name: 'Cristiano Ronaldo',
@@ -31,11 +42,4 @@ export default function PlayerTable() {
 			weight: 72,
 		},
 	];
-
-	return (
-		<Table<FootballPlayer>
-			titles={titles}
-			data={footballPlayers}
-			columnColors={columnColors}></Table>
-	);
 }
