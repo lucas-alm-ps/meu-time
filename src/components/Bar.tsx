@@ -17,4 +17,7 @@ const StyledBar = styled.div`
 	display: flex;
 	justify-content: right;
 	padding: 45px 85px 0 85px;
+	position: fixed;
+	top: 0;
+	left: 0;
 `;
