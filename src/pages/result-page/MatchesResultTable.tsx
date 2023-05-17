@@ -16,15 +16,16 @@ export default function MatchesResultTable() {
 		<Table<MatchResult>
 			data={matchResults}
 			titles={titles}
-			columnColors={columnColors}></Table>
+			columnColors={columnColors}
+			fontSize='32px'></Table>
 	);
 }
 
 function getMatchResults() {
 	return [
 		{
-			games: 0,
-			wins: 0,
+			games: 2,
+			wins: 2,
 			draws: 0,
 			losses: 0,
 		},

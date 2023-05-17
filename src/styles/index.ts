@@ -17,4 +17,5 @@ export const BoxTitle = styled.h3`
 	font-size: 40px;
 	line-height: 47px;
 	color: #ffffff;
+	margin-bottom: 30px;
 `;
