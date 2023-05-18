@@ -27,10 +27,10 @@
     <img src="src/assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">MEU-TIME</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    An app to search for football information using the API-Football API!
     <br />
     <a href="https://meu-time.vercel.app/"><strong>View Demo »</strong></a>
     <br />
