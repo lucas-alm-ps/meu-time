@@ -14,7 +14,7 @@ export default function ChoiceCard({
 	title,
 }: ChoiceCardProps) {
 	const [choice, setChoice] = useState('');
-	console.log(choice);
+	
 
 	function handleOptionSelect(event: React.ChangeEvent<HTMLSelectElement>) {
 		const selectedChoice = event.target.value;
@@ -24,7 +24,7 @@ export default function ChoiceCard({
 	return (
 		<>
 			<Instruction>{instruction}</Instruction>
-			<ChoiceBox>
+			<ChoiceBox choice={choice}>
 				<ChoiceTitle>{title}</ChoiceTitle>
 
 				<StyledSelect onChange={handleOptionSelect}>
