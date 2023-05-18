@@ -11,7 +11,7 @@ export default function LoginPage() {
 	const [error, setError] = useState(null);
 
 	return (
-		<MainPage setError={setError}>
+		<MainPage>
 			<Page>
 				<LeftSide>
 					<MainText>
@@ -20,7 +20,7 @@ export default function LoginPage() {
 					<Instruction>Insira sua chave da API-Football</Instruction>
 					<Input />
 					{error && <ErrorMessage>{error}</ErrorMessage>}
-					<Button text='Entrar' />
+					<Button text='Entrar' setError={setError}/>
 				</LeftSide>
 
 				<RightSide>
