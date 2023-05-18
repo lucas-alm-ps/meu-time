@@ -1,15 +1,19 @@
 import styled from 'styled-components';
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
+import ChoiceContext from '../context/ChoiceContext';
+import { useContext } from 'react';
 
 interface BarProps {
 	teamName?: string;
 }
 
 export default function Bar({ teamName }: BarProps) {
+	const { team } = useContext(ChoiceContext);
+
 	return (
 		<StyledBar>
-			<StyledTeamName>{teamName}</StyledTeamName>
+			<StyledTeamName>{team}</StyledTeamName>
 			<Link to='/'>
 				<Logo />
 			</Link>

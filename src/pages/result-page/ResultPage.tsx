@@ -5,8 +5,12 @@ import GoalsGraph from './GoalsGraph';
 import MatchesResultTable from './MatchesResultTable';
 import PlayerTable from './PlayerTable';
 import FormationCount from './FormationCount';
+import { useContext } from 'react';
+import ChoiceContext from '../../context/ChoiceContext';
 
 export default function ResultPage() {
+	const { country } = useContext(ChoiceContext);
+
 	return (
 		<MainPage>
 			<Page>

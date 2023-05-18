@@ -33,6 +33,8 @@ export default function LoginPage() {
 
 const Page = styled(StyledPage)`
 	width: auto;
+	display: flex;
+	align-items: start;
 `;
 
 const LeftSide = styled.div`
