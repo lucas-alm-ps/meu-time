@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Instruction } from '../styles/Instruction';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 
 interface ChoiceCardProps {
 	instruction: string;
