@@ -8,11 +8,10 @@ import MainPage from '../main-page/MainPage';
 import { useState } from 'react';
 
 export default function LoginPage() {
-	/* eslint-disable-next-line */
 	const [error, setError] = useState(null);
 
 	return (
-		<MainPage>
+		<MainPage setError={setError}>
 			<Page>
 				<LeftSide>
 					<MainText>
