@@ -8,7 +8,7 @@ import MainPage from '../main-page/MainPage';
 import { useState } from 'react';
 
 export default function LoginPage() {
-	const [error, setError] = useState(null);
+	const [error] = useState(null);
 
 	return (
 		<MainPage>
@@ -20,7 +20,7 @@ export default function LoginPage() {
 					<Instruction>Insira sua chave da API-Football</Instruction>
 					<Input />
 					{error && <ErrorMessage>{error}</ErrorMessage>}
-					<Button text='Entrar' setError={setError}/>
+					<Button text='Entrar' />
 				</LeftSide>
 
 				<RightSide>
