@@ -7,12 +7,21 @@ interface CardShowerProps {
 
 export default function CardShower({ title, children }: CardShowerProps) {
 	return (
-		<div>
+		<StyledBox>
 			<StyledTitle>{title}</StyledTitle>
 			{children}
-		</div>
+		</StyledBox>
 	);
 }
+
+const StyledBox = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: #464444;
+	border-radius: 10px;
+	padding: 25px 30px;
+`;
 
 const StyledTitle = styled.h5`
 	font-family: 'Roboto';

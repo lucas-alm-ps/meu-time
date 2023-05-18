@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { BoxTitle } from '../../styles';
 import MainPage from '../main-page/MainPage';
 import GoalsGraph from './GoalsGraph';
@@ -7,16 +8,21 @@ import PlayerTable from './PlayerTable';
 export default function ResultPage() {
 	return (
 		<MainPage>
-			<BoxTitle>Jogadores</BoxTitle>
-			<PlayerTable />
+			<Page>
+				<BoxTitle>Jogadores</BoxTitle>
+				<PlayerTable />
 
-			<BoxTitle>Resultados gerais</BoxTitle>
-			<MatchesResultTable />
+				<BoxTitle>Resultados gerais</BoxTitle>
+				<MatchesResultTable />
 
-			<BoxTitle>Estatisticas</BoxTitle>
-			<>
+				<BoxTitle>Estatisticas</BoxTitle>
 				<GoalsGraph />
-			</>
+			</Page>
 		</MainPage>
 	);
 }
+
+const Page = styled.div`
+	align-items: start;
+	flex-direction: column;
+`;

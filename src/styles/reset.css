@@ -127,7 +127,6 @@ table {
 body * {
 	box-sizing: border-box;
 	transition: all 0.3s ease-in-out;
-	display: block;
 }
 
 body {
