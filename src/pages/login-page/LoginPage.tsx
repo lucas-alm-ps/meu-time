@@ -8,7 +8,7 @@ import MainPage from '../main-page/MainPage';
 import { useState } from 'react';
 
 export default function LoginPage() {
-	const [error, setError] = useState(null);
+	const [error] = useState(null);
 
 	return (
 		<MainPage>

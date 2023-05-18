@@ -13,7 +13,7 @@ export default function ChoiceCard({
 	choices,
 	title,
 }: ChoiceCardProps) {
-	const [choice, setChoice] = useState('');
+	const [, setChoice] = useState('');
 
 	function handleOptionSelect(event: React.ChangeEvent<HTMLSelectElement>) {
 		const selectedChoice = event.target.value;
