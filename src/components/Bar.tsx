@@ -20,6 +20,7 @@ export default function Bar({ teamName }: BarProps) {
 const StyledBar = styled.div`
 	width: 100%;
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	padding: 45px 85px 0 85px;
 	position: fixed;

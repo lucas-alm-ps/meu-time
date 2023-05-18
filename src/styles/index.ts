@@ -18,4 +18,8 @@ export const BoxTitle = styled.h3`
 	line-height: 47px;
 	color: #ffffff;
 	margin-bottom: 30px;
+
+	:nth-of-type(n + 2) {
+		margin-top: 35px;
+	}
 `;
