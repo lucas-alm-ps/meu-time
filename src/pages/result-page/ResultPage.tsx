@@ -4,6 +4,7 @@ import MainPage from '../main-page/MainPage';
 import GoalsGraph from './GoalsGraph';
 import MatchesResultTable from './MatchesResultTable';
 import PlayerTable from './PlayerTable';
+import FormationCount from './FormationCount';
 
 export default function ResultPage() {
 	return (
@@ -16,7 +17,10 @@ export default function ResultPage() {
 				<MatchesResultTable />
 
 				<BoxTitle>Estatisticas</BoxTitle>
-				<GoalsGraph />
+				<StatisticsBox>
+					<GoalsGraph />
+					<FormationCount />
+				</StatisticsBox>
 			</Page>
 		</MainPage>
 	);
@@ -26,4 +30,8 @@ const Page = styled.div`
 	width: 100%;
 	align-items: start;
 	flex-direction: column;
+`;
+
+const StatisticsBox = styled.div`
+	display: flex;
 `;

@@ -27,8 +27,6 @@ export default function GoalsGraph() {
 		]),
 	];
 
-	console.log(dataArray);
-
 	return (
 		<CardShower title='Gols'>
 			<Chart
