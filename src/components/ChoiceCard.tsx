@@ -14,6 +14,7 @@ export default function ChoiceCard({
 	title,
 }: ChoiceCardProps) {
 	const [choice, setChoice] = useState('');
+	console.log(choice);
 
 	function handleOptionSelect(event: React.ChangeEvent<HTMLSelectElement>) {
 		const selectedChoice = event.target.value;
