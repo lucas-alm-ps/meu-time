@@ -15,6 +15,7 @@ export default function CardShower({ title, children }: CardShowerProps) {
 }
 
 const StyledBox = styled.div`
+	width: fit-content;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

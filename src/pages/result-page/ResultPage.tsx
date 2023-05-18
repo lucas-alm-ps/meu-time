@@ -23,6 +23,7 @@ export default function ResultPage() {
 }
 
 const Page = styled.div`
+	width: 100%;
 	align-items: start;
 	flex-direction: column;
 `;
