@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useState } from 'react';
+import MainPage from '../pages/main-page/MainPage';
+import { BoxTitle } from '../styles';
 
 interface ChoiceContent {
 	country: string;
@@ -26,25 +28,17 @@ export function ChoiceProvider({ children }: ChoiceProviderProps) {
 	const [team, setTeam] = useState('');
 	const [season, setSeason] = useState('');
 
-	if (country.length === 0) {
-		return <>MESSAGE</>;
-	}
-
-	if (league.length === 0) {
-		return <>MESSAGE</>;
-	}
-
-	if (team.length === 0) {
-		return <>MESSAGE</>;
-	}
-
-	if (season.length === 0) {
-		return <>MESSAGE</>;
-	}
-
 	return (
 		<ChoiceContext.Provider value={{ country, league, season, team }}>
 			{children}
 		</ChoiceContext.Provider>
+	);
+}
+
+function CustomMessage() {
+	return (
+		<MainPage>
+			<BoxTitle>{}</BoxTitle>
+		</MainPage>
 	);
 }
