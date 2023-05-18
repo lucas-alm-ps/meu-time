@@ -22,6 +22,9 @@ const StyledBox = styled.div`
 	background: #464444;
 	border-radius: 10px;
 	padding: 25px 30px;
+	:not(:first-child) {
+		margin-left: 30px;
+	}
 `;
 
 const StyledTitle = styled.h5`
