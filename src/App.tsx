@@ -4,6 +4,7 @@ import ChoicesPage from './pages/choices-page/ChoicesPage';
 import ResultPage from './pages/result-page/ResultPage';
 import { ChoiceProvider } from './context/ChoiceContext';
 import { ApiKeyProvider } from './context/ApiKeyContext';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
 	return (
@@ -14,6 +15,17 @@ function App() {
 						<Route path='/' Component={LoginPage} />
 						<Route path='/choose' Component={ChoicesPage} />
 						<Route path='/result' Component={ResultPage} />
+						{/* <Route
+							path='/prot'
+							element={
+								<ProtectedRoute
+									authenticationPath='/'
+									outlet={<ChoicesPage />}
+								/>
+							}
+						/> */}
+						<ProtectedRoute path='/prot' authenticationPath='/' />
+						<Route path='*' element={<h1>Not Found</h1>} />
 					</Routes>
 				</BrowserRouter>
 			</ChoiceProvider>

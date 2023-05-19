@@ -20,10 +20,13 @@ interface ApiKeyProviderProps {
 export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	const [apiKey, setApiKey] = useState('');
 	const [executeEffect, setExecuteEffect] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	useEffect(() => {
 		if (executeEffect) {
 			localStorage.setItem('apiKey', apiKey);
+			setIsAuthenticated(isApiKeyValid(apiKey));
+			setExecuteEffect(false);
 		} else {
 			setExecuteEffect(true);
 		}
@@ -47,4 +50,10 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 function loadApiKey() {
 	const apiKey = localStorage.getItem('apiKey');
 	return apiKey;
+}
+
+function isApiKeyValid(apiKey: string) {
+	if (apiKey.length === 0) return false;
+	// add api call to check status of api key
+	return true;
 }
