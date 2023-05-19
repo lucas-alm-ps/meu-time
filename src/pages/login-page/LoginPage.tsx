@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import styled from 'styled-components';
 import footballPlayer from '../../assets/football-player.png';
 import { StyledPage } from '../../styles/Page';
@@ -5,10 +6,13 @@ import { Instruction } from '../../styles/';
 import Input from './Input';
 import Button from '../../components/Button';
 import MainPage from '../main-page/MainPage';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import ApiKeyContext from '../../context/ApiKeyContext';
 
 export default function LoginPage() {
 	const [error] = useState(null);
+
+	const { setApiKey, apiKey } = useContext(ApiKeyContext);
 
 	return (
 		<MainPage>
@@ -18,9 +22,9 @@ export default function LoginPage() {
 						Explore o mundo do futebol em <span>um só lugar</span>
 					</MainText>
 					<Instruction>Insira sua chave da API-Football</Instruction>
-					<Input />
+					<Input inputValue={apiKey} setInputValue={setApiKey} />
 					{error && <ErrorMessage>{error}</ErrorMessage>}
-					<Button text='Entrar' />
+					<Button text='Entrar' handleClick={() => {}} />
 				</LeftSide>
 
 				<RightSide>

@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 interface ButtonProps {
 	text: string;
+	handleClick?: () => void;
 }
 
-export default function Button({ text }: ButtonProps) {
-	return <StyledButton>{text}</StyledButton>;
+export default function Button({ text, handleClick }: ButtonProps) {
+	return <StyledButton onClick={handleClick}>{text}</StyledButton>;
 }
 
 const StyledButton = styled.button`

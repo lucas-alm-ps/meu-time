@@ -2,13 +2,12 @@ import { FaKey as KeyIcon } from 'react-icons/fa';
 import styled from 'styled-components';
 import { ChangeEvent, useState } from 'react';
 
-export default function Input() {
-	const [inputValue, setInputValue] = useState('');
+interface InputProps {
+	inputValue: string;
+	setInputValue: (inputValue: string) => void;
+}
 
-	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setInputValue(event.target.value);
-	};
-
+export default function Input({ inputValue, setInputValue }: InputProps) {
 	return (
 		<StyledInputBox>
 			<KeyIcon className='icon' />
@@ -20,6 +19,10 @@ export default function Input() {
 			/>
 		</StyledInputBox>
 	);
+
+	function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+		setInputValue(event.target.value);
+	}
 }
 
 const StyledInputBox = styled.div`

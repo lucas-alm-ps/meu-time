@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { createContext, useState } from 'react';
+import React from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 interface ApiKeyContent {
 	apiKey: string;
@@ -18,11 +19,23 @@ interface ApiKeyProviderProps {
 
 export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	const [apiKey, setApiKey] = useState('');
+	const [executeEffect, setExecuteEffect] = useState(false);
 
-	const savedApiKey = loadApiKey();
-	if (savedApiKey) {
-		setApiKey(savedApiKey);
-	}
+	useEffect(() => {
+		if (executeEffect) {
+			localStorage.setItem('apiKey', apiKey);
+		} else {
+			setExecuteEffect(true);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [apiKey]);
+
+	useEffect(() => {
+		const savedApiKey = loadApiKey();
+		if (savedApiKey) {
+			setApiKey(savedApiKey);
+		}
+	}, []);
 
 	return (
 		<ApiKeyContext.Provider value={{ apiKey, setApiKey }}>
