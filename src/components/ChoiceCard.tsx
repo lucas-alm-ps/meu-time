@@ -6,27 +6,30 @@ interface ChoiceCardProps {
 	instruction: string;
 	choices: string[];
 	title: string;
+	setChoice: (inputValue: string) => void;
 }
 
 export default function ChoiceCard({
 	instruction,
 	choices,
 	title,
+	setChoice,
 }: ChoiceCardProps) {
-	const [, setChoice] = useState('');
+	const [selected, setSelected] = useState(false);
 
 	function handleOptionSelect(event: React.ChangeEvent<HTMLSelectElement>) {
 		const selectedChoice = event.target.value;
 		setChoice(selectedChoice);
+		setSelected(true);
 	}
 
 	return (
 		<>
-			<Instruction>{instruction}</Instruction>
-			<ChoiceBox>
-				<ChoiceTitle>{title}</ChoiceTitle>
+			{!selected && <Instruction>{instruction}</Instruction>}
+			<ChoiceBox selected={selected}>
+				<ChoiceTitle selected={selected}>{title}</ChoiceTitle>
 
-				<StyledSelect onChange={handleOptionSelect}>
+				<StyledSelect onChange={handleOptionSelect} selected={selected}>
 					{choices.map((choice, index) => (
 						<option value={choice} key={index}>
 							{choice}
@@ -38,7 +41,10 @@ export default function ChoiceCard({
 	);
 }
 
-const ChoiceBox = styled.div`
+interface SelectionProps {
+	selected: boolean;
+}
+const ChoiceBox = styled.div<SelectionProps>`
 	width: 470px;
 	padding: 30px 70px;
 	border: 1px solid #656464;
@@ -47,9 +53,18 @@ const ChoiceBox = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	${({ selected }) =>
+		selected &&
+		`
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		`}
 `;
 
-const ChoiceTitle = styled.h2`
+const ChoiceTitle = styled.h2<SelectionProps>`
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 700;
@@ -57,9 +72,15 @@ const ChoiceTitle = styled.h2`
 	line-height: 47px;
 	color: #ffffff;
 	margin-bottom: 25px;
+
+	${({ selected }) =>
+		selected &&
+		`
+		margin: 0 50px 0 0;
+	`}
 `;
 
-const StyledSelect = styled.select`
+const StyledSelect = styled.select<SelectionProps>`
 	width: 330px;
 	height: 65px;
 
@@ -85,4 +106,10 @@ const StyledSelect = styled.select`
 		font-style: normal;
 		font-size: 25px;
 	}
+
+	${({ selected }) =>
+		selected &&
+		`
+		background: #D01E1F;
+	`}
 `;

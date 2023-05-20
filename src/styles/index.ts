@@ -7,7 +7,7 @@ export const Instruction = styled.h4`
 	font-size: 32px;
 	line-height: 38px;
 	color: #ffffff;
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 `;
 
 export const BoxTitle = styled.h3`
