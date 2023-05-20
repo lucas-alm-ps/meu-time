@@ -45,7 +45,7 @@ interface SelectionProps {
 	selected: boolean;
 }
 const ChoiceBox = styled.div<SelectionProps>`
-	width: 470px;
+	width: 600px;
 	padding: 30px 70px;
 	border: 1px solid #656464;
 	border-radius: 10px;
@@ -86,6 +86,7 @@ const StyledSelect = styled.select<SelectionProps>`
 
 	background: #464444;
 	border-radius: 10px;
+	border: none;
 	padding: 0 20px;
 
 	font-family: 'Roboto';
