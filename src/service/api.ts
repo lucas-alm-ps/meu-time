@@ -12,10 +12,11 @@ function createApi() {
 		},
 	});
 
-	api.interceptors.request.use((config) => {
-		console.log('Request Headers:', config.headers);
-		return config;
-	});
+	// UNCOMMENT TO DEBUG API CALLS
+	// api.interceptors.request.use((config) => {
+	// 	console.log('Request Headers:', config.headers);
+	// 	return config;
+	// });
 
 	return api;
 }
