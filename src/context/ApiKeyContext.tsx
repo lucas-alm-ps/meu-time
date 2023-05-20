@@ -51,6 +51,7 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	);
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function loadApiKey() {
 	const apiKey = localStorage.getItem('apiKey');
 	if (import.meta.env.VITE_DEV_MODE === 'true') {

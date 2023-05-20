@@ -1,6 +1,6 @@
 import { FaKey as KeyIcon } from 'react-icons/fa';
 import styled from 'styled-components';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 interface InputProps {
 	inputValue: string;
