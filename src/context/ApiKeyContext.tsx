@@ -5,11 +5,13 @@ import { createContext, useEffect, useState } from 'react';
 interface ApiKeyContent {
 	apiKey: string;
 	setApiKey: (apiKey: string) => void;
+	isAuthenticated: boolean;
 }
 
 const ApiKeyContext = createContext<ApiKeyContent>({
 	apiKey: '',
 	setApiKey: () => {},
+	isAuthenticated: false,
 });
 export default ApiKeyContext;
 
@@ -21,9 +23,10 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	const [apiKey, setApiKey] = useState('');
 	const [executeEffect, setExecuteEffect] = useState(false);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [devMode, setDevMode] = useState(false);
 
 	useEffect(() => {
-		if (executeEffect) {
+		if (executeEffect && !devMode) {
 			localStorage.setItem('apiKey', apiKey);
 			setIsAuthenticated(isApiKeyValid(apiKey));
 			setExecuteEffect(false);
@@ -41,15 +44,16 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	}, []);
 
 	return (
-		<ApiKeyContext.Provider value={{ apiKey, setApiKey }}>
+		<ApiKeyContext.Provider value={{ apiKey, setApiKey, isAuthenticated }}>
 			{children}
 		</ApiKeyContext.Provider>
 	);
-}
 
-function loadApiKey() {
-	const apiKey = localStorage.getItem('apiKey');
-	return apiKey;
+	function loadApiKey() {
+		const apiKey = localStorage.getItem('apiKey');
+		if(process.env.REACT_APP_DEV_MODE === 'true') {
+		return apiKey;
+	}
 }
 
 function isApiKeyValid(apiKey: string) {

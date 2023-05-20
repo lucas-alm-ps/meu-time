@@ -11,8 +11,9 @@ export default function ProtectedRoute({
 	authenticationPath,
 	outlet,
 }: ProtectedRouteProps) {
-	const { apiKey } = useContext(ApiKeyContext);
-	if (1 === 1) {
+	const { isAuthenticated } = useContext(ApiKeyContext);
+
+	if (isAuthenticated) {
 		return outlet;
 	} else {
 		return <Navigate to={{ pathname: authenticationPath }} />;

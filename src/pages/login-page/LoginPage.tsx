@@ -8,11 +8,16 @@ import Button from '../../components/Button';
 import MainPage from '../main-page/MainPage';
 import { useContext, useState } from 'react';
 import ApiKeyContext from '../../context/ApiKeyContext';
+import { Navigate } from 'react-router-dom';
 
 export default function LoginPage() {
 	const [error] = useState(null);
 
-	const { setApiKey, apiKey } = useContext(ApiKeyContext);
+	const { setApiKey, apiKey, isAuthenticated } = useContext(ApiKeyContext);
+
+	if (isAuthenticated) {
+		return <Navigate to='/choose' />;
+	}
 
 	return (
 		<MainPage>
