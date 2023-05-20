@@ -49,17 +49,17 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 			{children}
 		</ApiKeyContext.Provider>
 	);
-
-	function loadApiKey() {
-		const apiKey = localStorage.getItem('apiKey');
-		if (import.meta.env.VITE_DEV_MODE === 'true') {
-			return import.meta.env.VITE_API_KEY;
-		}
-		return apiKey;
-	}
 }
 
-function isApiKeyValid(apiKey: string) {
+export function loadApiKey() {
+	const apiKey = localStorage.getItem('apiKey');
+	if (import.meta.env.VITE_DEV_MODE === 'true') {
+		return import.meta.env.VITE_API_KEY;
+	}
+	return apiKey;
+}
+
+function isApiKeyValid(apiKey: string): boolean {
 	if (apiKey.length === 0) return false;
 	// add api call to check status of api key
 	return true;
