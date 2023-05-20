@@ -23,10 +23,9 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	const [apiKey, setApiKey] = useState('');
 	const [executeEffect, setExecuteEffect] = useState(false);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [devMode, setDevMode] = useState(false);
 
 	useEffect(() => {
-		if (executeEffect && !devMode) {
+		if (executeEffect) {
 			localStorage.setItem('apiKey', apiKey);
 			setIsAuthenticated(isApiKeyValid(apiKey));
 			setExecuteEffect(false);
@@ -40,6 +39,8 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 		const savedApiKey = loadApiKey();
 		if (savedApiKey) {
 			setApiKey(savedApiKey);
+		} else {
+			console.log('No api key found');
 		}
 	}, []);
 
@@ -50,12 +51,9 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	);
 
 	function loadApiKey() {
-		console.log('loadApiKey', import.meta.env.VITE_DEV_MODE);
 		const apiKey = localStorage.getItem('apiKey');
-		if (process.env.REACT_APP_DEV_MODE === 'true') {
-			setDevMode(true);
-			console.log('dev mode');
-			return process.env.REACT_APP_API_KEY;
+		if (import.meta.env.VITE_DEV_MODE === 'true') {
+			return import.meta.env.VITE_API_KEY;
 		}
 		return apiKey;
 	}
