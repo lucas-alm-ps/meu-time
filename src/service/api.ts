@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { loadApiKey } from '../context/ApiKeyContext';
 
 function createApi() {
@@ -8,7 +8,7 @@ function createApi() {
 		baseURL: 'https://v3.football.api-sports.io/',
 		headers: {
 			'x-rapidapi-key': apiKey,
-			'x-rapidapi-host': 'v3.football.api-sports.io',
+			'x-rapidapi-host': 'api-football-v1.p.rapidapi.com',
 		},
 	});
 
@@ -22,3 +22,14 @@ function createApi() {
 }
 
 export const api = createApi();
+
+export async function handleRequest<T>(
+	requestFn: () => Promise<AxiosResponse<T>>
+): Promise<T> {
+	try {
+		const response = await requestFn();
+		return response.data;
+	} catch (error) {
+		throw new Error(`Request failed with status ${error}`);
+	}
+}
