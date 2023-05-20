@@ -50,8 +50,13 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	);
 
 	function loadApiKey() {
+		console.log('loadApiKey', import.meta.env.VITE_DEV_MODE);
 		const apiKey = localStorage.getItem('apiKey');
-		if(process.env.REACT_APP_DEV_MODE === 'true') {
+		if (process.env.REACT_APP_DEV_MODE === 'true') {
+			setDevMode(true);
+			console.log('dev mode');
+			return process.env.REACT_APP_API_KEY;
+		}
 		return apiKey;
 	}
 }
