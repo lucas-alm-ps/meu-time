@@ -14,9 +14,9 @@ export default function MainPage({ children }: { children?: ReactNode }) {
 
 const Page = styled(StyledPage)`
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	flex-direction: column;
-	padding: 45px 85px 30px 85px;
-	margin-top: 180px;
-	margin-bottom: 120px;
+	padding: 20px 85px 30px 85px;
+	margin-top: 120px;
+	margin-bottom: 20px;
 `;

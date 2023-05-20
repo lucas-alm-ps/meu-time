@@ -8,7 +8,13 @@ interface GetPlayersParams {
 
 export async function getPlayers({ team, season }: GetPlayersParams) {
 	return await handleRequest(() =>
-		axios.get(`/players/`, { params: { team, season } })
+		api.get(`/players/`, { params: { team, season } })
+	);
+}
+
+export async function getLeaguesByCountry(country: string) {
+	return await handleRequest(() =>
+		api.get(`v3/leagues/`, { params: { country } })
 	);
 }
 

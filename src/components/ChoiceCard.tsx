@@ -53,6 +53,7 @@ const ChoiceBox = styled.div<SelectionProps>`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 30px;
 
 	${({ selected }) =>
 		selected &&
