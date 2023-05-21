@@ -1,25 +1,27 @@
 import styled from 'styled-components';
 import { Instruction } from '../styles/';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import ChoiceContext from '../context/ChoiceContext';
 
 interface ChoiceCardProps {
 	instruction: string;
 	choices: string[];
 	title: string;
-	setChoice: (inputValue: string) => void;
+	stateName: string;
 }
 
 export default function ChoiceCard({
 	instruction,
 	choices,
 	title,
-	setChoice,
+	stateName,
 }: ChoiceCardProps) {
 	const [selected, setSelected] = useState(false);
+	const { changeSelection } = useContext(ChoiceContext);
 
 	function handleOptionSelect(event: React.ChangeEvent<HTMLSelectElement>) {
 		const selectedChoice = event.target.value;
-		setChoice(selectedChoice);
+		changeSelection(stateName, selectedChoice);
 		setSelected(true);
 	}
 
