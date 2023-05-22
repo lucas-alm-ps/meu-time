@@ -9,11 +9,33 @@ interface FootballPlayer extends Record<string, unknown> {
 	weight: number;
 }
 
-export default function PlayerTable() {
+interface PlayerResponse {
+	id: number;
+	name: string;
+	firstname: string;
+	lastname: string;
+	age: number;
+	birth: {
+		date: string;
+		place: string;
+		country: string;
+	};
+	nationality: string;
+	height: string;
+	weight: string;
+	injured: boolean;
+	photo: string;
+}
+
+interface PlayerTableProps {
+	data: PlayerResponse[];
+}
+
+export default function PlayerTable({ data }: PlayerTableProps) {
 	const titles = [' ', 'Nome', 'Idade', 'Nacionalidade', 'Altura', 'Peso'];
 	const columnColors = ['', '#F5950C', '#fff', '#F5950C'];
 
-	const footballPlayers = getPlayersData();
+	const footballPlayers = data && getPlayersData(data);
 
 	return (
 		<Table<FootballPlayer>
@@ -23,23 +45,17 @@ export default function PlayerTable() {
 	);
 }
 
-function getPlayersData() {
-	return [
-		{
-			image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb-9v6iehO3b8igBOrufRG3YPcEiebiNfzdQ&usqp=CAU',
-			name: 'Cristiano Ronaldo',
-			age: 36,
-			nationality: 'Portuguese',
-			height: 187,
-			weight: 83,
-		},
-		{
-			image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGv0ZIrLidHrXmxdSY38qwW3_FyQZhJo-sFQ&usqp=CAU',
-			name: 'Lionel Messi',
-			age: 34,
-			nationality: 'Argentinian',
-			height: 170,
-			weight: 72,
-		},
-	];
+function getPlayersData(data: PlayerResponse[]) {
+	if (data.length === 0 || !data) return [];
+	return data.map((player) => {
+		const newPlayer: FootballPlayer = {
+			image: player.photo,
+			name: player.name,
+			age: player.age,
+			nationality: player.nationality,
+			height: Number(player.height),
+			weight: Number(player.weight),
+		};
+		return newPlayer;
+	});
 }
