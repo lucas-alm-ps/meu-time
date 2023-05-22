@@ -7,10 +7,14 @@ interface MatchResult extends Record<string, unknown> {
 	games: number;
 }
 
-export default function MatchesResultTable() {
+interface MatchesResultTableProps {
+	data: MatchObject;
+}
+
+export default function MatchesResultTable({ data }: MatchesResultTableProps) {
 	const titles = ['Jogos', 'Vitórias', 'Empates', 'Derrotas'];
 	const columnColors = ['#fff', '#73F50C', '#D01E1F'];
-	const matchResults = getMatchResults();
+	const matchResults = getMatchResults(data);
 
 	return (
 		<Table<MatchResult>
@@ -21,13 +25,31 @@ export default function MatchesResultTable() {
 	);
 }
 
-function getMatchResults() {
+function getMatchResults(data: MatchObject) {
+	const draws = data.draws.total;
+	const wins = data.wins.total;
+	const losses = data.losses.total;
+	const games = data.played.total;
+
 	return [
 		{
-			games: 2,
-			wins: 2,
-			draws: 0,
-			losses: 0,
+			wins,
+			draws,
+			losses,
+			games,
 		},
 	];
+}
+
+interface Fixture {
+	home: number;
+	away: number;
+	total: number;
+}
+
+interface MatchObject {
+	wins: Fixture;
+	draws: Fixture;
+	losses: Fixture;
+	played: Fixture;
 }

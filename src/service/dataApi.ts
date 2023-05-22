@@ -26,7 +26,6 @@ export async function getCountries() {
 }
 
 export async function getTeamsByLeague(league: string, season: string) {
-	console.log(league, season);
 	return await handleRequest(() =>
 		api.get(`v3/teams/`, { params: { league, season } })
 	);
@@ -39,7 +38,7 @@ export async function getTeamStats(
 ) {
 	return await handleRequest(() =>
 		api.get(`v3/teams/statistics`, {
-			params: { team: teamId, season, leagueId: leagueId },
+			params: { team: teamId, season, league: leagueId },
 		})
 	);
 }

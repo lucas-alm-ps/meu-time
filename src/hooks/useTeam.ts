@@ -39,13 +39,11 @@ export default function useTeam({
 				selectedLeagueId,
 				selectedSeason
 			);
-			console.log(response);
 			const teams = response.map((item: any) => item.team.name);
 			const ids = response.map((item: any) => String(item.team.id));
 			setData(response);
 			setTeamOptions(teams);
 			setIds(ids);
-			console.log(teams);
 		} catch (error) {
 			setError(error as Error);
 		} finally {
@@ -55,7 +53,6 @@ export default function useTeam({
 
 	useEffect(() => {
 		if (selectedLeagueId && selectedSeason) fetchTeams();
-		console.log(data);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedLeagueId, selectedSeason]);
 

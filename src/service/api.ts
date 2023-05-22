@@ -12,7 +12,7 @@ function createApi() {
 		},
 	});
 
-	// UNCOMMENT TO DEBUG API CALLS
+	// UNCOMMENT TO SEE REQUEST HEADERS
 	// api.interceptors.request.use((config) => {
 	// 	console.log('Request Headers:', config.headers);
 	// 	return config;

@@ -7,6 +7,7 @@ import PlayerTable from './PlayerTable';
 import FormationCount from './FormationCount';
 import { useContext } from 'react';
 import ChoiceContext from '../../context/ChoiceContext';
+import useStatistics from '../../hooks/useStatistics';
 
 export default function ResultPage() {
 	const {
@@ -15,6 +16,14 @@ export default function ResultPage() {
 		selectedTeamId,
 		selectedSeason,
 	} = useContext(ChoiceContext);
+
+	const { data } = useStatistics(
+		selectedLeagueId,
+		selectedSeason,
+		selectedTeamId
+	);
+
+	console.log(data);
 
 	return (
 		<MainPage>

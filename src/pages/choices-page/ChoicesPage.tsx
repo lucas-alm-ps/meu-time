@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useContext } from 'react';
 import ChoiceCard from '../../components/ChoiceCard';
 import ChoiceContext from '../../context/ChoiceContext';
@@ -69,7 +70,11 @@ export default function ChoicesPage() {
 
 			{teamLoading ? (
 				<Spinner />
-			) : selectedCountry && selectedSeason && selectedLeague ? (
+			) : selectedCountry &&
+			  selectedSeason &&
+			  selectedLeague &&
+			  !countryLoading &&
+			  !leagueLoading ? (
 				<ChoiceCard
 					title='Time'
 					choices={teamOptions}

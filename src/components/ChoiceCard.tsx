@@ -37,18 +37,24 @@ export default function ChoiceCard({
 		<>
 			{!selected && <Instruction>{instruction}</Instruction>}
 			<ChoiceBox selected={selected}>
-				<ChoiceTitle selected={selected}>{title}</ChoiceTitle>
+				<ChoiceTitle selected={selected}>
+					{choices.length > 0 ? title : '0 resultados'}
+				</ChoiceTitle>
 
-				<StyledSelect onChange={handleOptionSelect} selected={selected}>
-					{choices.map((choice, index) => (
-						<option
-							value={choice}
-							key={index}
-							id={ids && ids[index]}>
-							{choice}
-						</option>
-					))}
-				</StyledSelect>
+				{choices.length > 0 && (
+					<StyledSelect
+						onChange={handleOptionSelect}
+						selected={selected}>
+						{choices.map((choice, index) => (
+							<option
+								value={choice}
+								key={index}
+								id={ids && ids[index]}>
+								{choice}
+							</option>
+						))}
+					</StyledSelect>
+				)}
 			</ChoiceBox>
 		</>
 	);
