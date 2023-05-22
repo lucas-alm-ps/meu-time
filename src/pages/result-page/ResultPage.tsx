@@ -14,12 +14,10 @@ export default function ResultPage() {
 	const { selectedLeagueId, selectedTeamId, selectedSeason } =
 		useContext(ChoiceContext);
 
-	const { fixtures, statisticsLoading, statistics } = useStatistics(
-		selectedLeagueId,
-		selectedSeason,
-		selectedTeamId
-	);
-	console.log(fixtures);
+	const { fixtures, statisticsLoading, statistics, minutesGoalsPercentage } =
+		useStatistics(selectedLeagueId, selectedSeason, selectedTeamId);
+
+	console.log('FIXTURES ', minutesGoalsPercentage);
 	if (statisticsLoading || !statistics) return <Spinner />;
 
 	return (
@@ -35,7 +33,7 @@ export default function ResultPage() {
 
 				<BoxTitle>Estatisticas</BoxTitle>
 				<StatisticsBox>
-					<GoalsGraph />
+					<GoalsGraph data={minutesGoalsPercentage} />
 					<FormationCount />
 				</StatisticsBox>
 			</Page>

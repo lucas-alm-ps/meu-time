@@ -1,27 +1,22 @@
 import { Chart } from 'react-google-charts';
 import CardShower from '../../components/CardShower';
 
-export default function GoalsGraph() {
-	const dataMockup = {
-		minute: {
-			'0-15': {
-				total: 4,
-				percentage: '6.06%',
-			},
-			'16-30': {
-				total: 17,
-				percentage: '25.76%',
-			},
-			'31-45': {
-				total: 11,
-				percentage: '16.67%',
-			},
-		},
+interface MinuteData {
+	[range: string]: {
+		total: number;
+		percentage: string;
 	};
+}
 
+interface GoalsGraphProps {
+	data: MinuteData[];
+}
+
+export default function GoalsGraph({ data }: GoalsGraphProps) {
+	console.log('DATA FROM GRAPH ', data);
 	const dataArray = [
 		['Minuto', 'Gols'],
-		...Object.entries(dataMockup.minute).map(([minute, { total }]) => [
+		...Object.entries(data).map(([minute, { total }]) => [
 			minute + ' min',
 			total,
 		]),
