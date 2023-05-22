@@ -23,11 +23,11 @@ export async function getLeaguesByCountry(country: string) {
 }
 
 export async function getCountries() {
-	const response = handleRequest(() => api.get(`v3/countries`));
-	return response;
+	return await handleRequest(() => api.get(`v3/countries`));
 }
 
 export async function getTeamsByLeague(league: string, season: string) {
+	console.log(league, season);
 	return await handleRequest(() =>
 		api.get(`v3/teams/`, { params: { league, season } })
 	);

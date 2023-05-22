@@ -30,6 +30,8 @@ export default function useCountry() {
 		}
 	}
 
+	console.log('COUNTRY CHANGED', selectedCountry);
+
 	useEffect(() => {
 		fetchCountries();
 	}, []);
@@ -39,5 +41,6 @@ export default function useCountry() {
 		countryLoading: loading,
 		countryError: error,
 		setSelectedCountry,
+		selectedCountry,
 	};
 }

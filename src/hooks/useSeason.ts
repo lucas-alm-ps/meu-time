@@ -4,7 +4,7 @@ import { getSeasons } from '../service/dataApi';
 export default function useSeason() {
 	const [selectedSeason, setSelectedSeason] = useState('');
 	const [seasonOptions, setSeasonOptions] = useState<string[]>([]);
-	const [data, setData] = useState<Season[]>([]);
+	const [data, setData] = useState<string[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
 	async function fetchSeasons() {
@@ -30,5 +30,6 @@ export default function useSeason() {
 		seasonLoading: loading,
 		seasonError: error,
 		setSelectedSeason,
+		selectedSeason,
 	};
 }

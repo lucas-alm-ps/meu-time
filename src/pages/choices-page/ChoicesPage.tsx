@@ -1,10 +1,27 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import ChoiceCard from '../../components/ChoiceCard';
 import ChoiceContext from '../../context/ChoiceContext';
 import MainPage from '../main-page/MainPage';
 
 export default function ChoicesPage() {
-	const { countryOptions, countryLoading } = useContext(ChoiceContext);
+	const {
+		countryOptions,
+		countryLoading,
+		setSelectedCountry,
+		seasonLoading,
+		teamLoading,
+		leagueLoading,
+		seasonOptions,
+		setSelectedLeague,
+		setSelectedSeason,
+		setSelectedTeam,
+		leagueOptions,
+		teamOptions,
+		selectedCountry,
+		selectedLeague,
+		selectedSeason,
+		selectedTeam,
+	} = useContext(ChoiceContext);
 
 	if (countryLoading) return <MainPage>Carregando...</MainPage>;
 
@@ -14,40 +31,44 @@ export default function ChoicesPage() {
 				title='País'
 				choices={countryOptions}
 				instruction='Selecione o país desejado'
-				stateName='country'
+				setChoice={setSelectedCountry}
 			/>
-			{/* {loadingSeasons && <MainPage>Carregando...</MainPage>}
+			{seasonLoading && <MainPage>Carregando...</MainPage>}
 
 			{selectedCountry && (
 				<ChoiceCard
 					title='Temporada'
-					choices={seasonsOptions}
-					instruction='Selecione a temproada desejada'
+					choices={seasonOptions}
+					instruction='Selecione a temporada desejada'
 					setChoice={setSelectedSeason}
 				/>
 			)}
 
-			{loadingLeagues ? (
+			{leagueLoading ? (
 				<MainPage>Carregando...</MainPage>
 			) : selectedCountry && selectedSeason ? (
 				<ChoiceCard
 					title='Liga'
-					choices={leaguesOptions}
+					choices={leagueOptions}
 					instruction='Selecione a liga desejada'
 					setChoice={setSelectedLeague}
 				/>
 			) : null}
 
-			{loadingTeams ? (
+			{teamLoading ? (
 				<MainPage>Carregando...</MainPage>
 			) : selectedCountry && selectedSeason && selectedLeague ? (
 				<ChoiceCard
 					title='Time'
-					choices={teamsOptions}
+					choices={teamOptions}
 					instruction='Selecione o time desejado'
 					setChoice={setSelectedTeam}
 				/>
-			) : null} */}
+			) : null}
 		</MainPage>
 	);
 }
+
+// useEffect(() => {
+// 	setSelectedLeague('');
+// }, [selectedCountry, selectedSeason]);

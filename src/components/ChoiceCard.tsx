@@ -7,21 +7,20 @@ interface ChoiceCardProps {
 	instruction: string;
 	choices: string[];
 	title: string;
-	stateName: string;
+	setChoice: (choice: string) => void;
 }
 
 export default function ChoiceCard({
 	instruction,
 	choices,
 	title,
-	stateName,
+	setChoice,
 }: ChoiceCardProps) {
 	const [selected, setSelected] = useState(false);
-	const { changeSelection } = useContext(ChoiceContext);
 
 	function handleOptionSelect(event: React.ChangeEvent<HTMLSelectElement>) {
 		const selectedChoice = event.target.value;
-		changeSelection(stateName, selectedChoice);
+		setChoice(selectedChoice);
 		setSelected(true);
 	}
 

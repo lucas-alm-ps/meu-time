@@ -1,146 +1,98 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { createContext, useState } from 'react';
-import {
-	getLeaguesByCountry,
-	getSeasons,
-	getTeamsByLeague,
-} from '../service/dataApi';
+import { createContext } from 'react';
 import useCountry from '../hooks/useCountry';
+import useSeason from '../hooks/useSeason';
+import useLeague from '../hooks/useLeague';
+import useTeam from '../hooks/useTeam';
+import { useState } from 'react';
 
 interface ChoiceContent {
 	countryOptions: string[];
 	countryLoading: boolean;
-	changeSelection: (name: string, value: string) => void;
+	setSelectedCountry: (country: string) => void;
+	seasonOptions: string[];
+	seasonLoading: boolean;
+	setSelectedSeason: (season: string) => void;
+	leagueOptions: string[];
+	leagueLoading: boolean;
+	setSelectedLeague: (league: string) => void;
+	teamOptions: string[];
+	teamLoading: boolean;
+	setSelectedTeam: (team: string) => void;
+	selectedCountry: string;
+	selectedSeason: string;
+	selectedLeague: string;
+	selectedTeam: string;
+	selectedLeagueId: string;
 }
 
 interface ChoiceProviderProps {
 	children: React.ReactNode;
 }
 
-interface Selections {
-	country: string;
-	season: string;
-	league: string;
-	team: string;
-	leagueId: string;
-}
-type UpdatedSelections = Partial<Selections>;
-
 const ChoiceContext = createContext<ChoiceContent>({
 	countryOptions: [],
 	countryLoading: false,
-	changeSelection: () => {},
+	setSelectedCountry: () => {},
+	seasonOptions: [],
+	seasonLoading: false,
+	setSelectedSeason: () => {},
+	leagueOptions: [],
+	leagueLoading: false,
+	setSelectedLeague: () => {},
+	teamOptions: [],
+	teamLoading: false,
+	setSelectedTeam: () => {},
+	selectedCountry: '',
+	selectedSeason: '',
+	selectedLeague: '',
+	selectedTeam: '',
+	selectedLeagueId: '',
 });
 export default ChoiceContext;
 
 export function ChoiceProvider({ children }: ChoiceProviderProps) {
-	const { countryOptions, countryLoading } = useCountry();
-
-	const [selections, setSelections] = useState<Selections>({
-		country: '',
-		season: '',
-		league: '',
-		leagueId: '',
-		team: '',
-	});
+	const {
+		countryOptions,
+		countryLoading,
+		setSelectedCountry,
+		selectedCountry,
+	} = useCountry();
+	const { seasonOptions, seasonLoading, setSelectedSeason, selectedSeason } =
+		useSeason();
+	const {
+		leagueOptions,
+		leagueLoading,
+		setSelectedLeague,
+		selectedLeagueId,
+		selectedLeague,
+	} = useLeague(selectedCountry);
+	const { teamOptions, teamLoading, setSelectedTeam, selectedTeam } = useTeam(
+		{ selectedLeagueId, selectedSeason }
+	);
 
 	return (
 		<ChoiceContext.Provider
 			value={{
 				countryOptions,
 				countryLoading,
-				changeSelection,
+				setSelectedCountry,
+				seasonOptions,
+				seasonLoading,
+				setSelectedSeason,
+				leagueOptions,
+				leagueLoading,
+				setSelectedLeague,
+				teamOptions,
+				teamLoading,
+				setSelectedTeam,
+				selectedCountry,
+				selectedLeague,
+				selectedSeason,
+				selectedTeam,
+				selectedLeagueId,
 			}}>
 			{children}
 		</ChoiceContext.Provider>
 	);
-
-	function changeSelection(name: string, value: string) {
-		setSelections((prevSelections) => ({
-			...prevSelections,
-			[name]: value,
-		}));
-	}
-
-	// async function fetchData() {
-	// 	try {
-	// 		console.log('fetching data');
-	// 		const seasons = await getSeasonsOptions(setLoadingSeasons);
-	// 		setSeasonsOptions(seasons);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// }
-
-	// async function fetchLeagues(country: string) {
-	// 	try {
-	// 		const leagues = await getLeagueOptions(country, setLoadingLeagues);
-	// 		console.log(leagues);
-	// 		setLeaguesOptions(leagues);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// }
-	// async function fetchTeams(league: string) {
-	// 	try {
-	// 		const teams = await getTeamsOptions(
-	// 			league,
-	// 			selectedSeason,
-	// 			setLoadingTeams
-	// 		);
-	// 		setTeamsOptions(teams);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// }
-}
-
-async function getSeasonsOptions(setLoadingSeasons: (value: boolean) => void) {
-	setLoadingSeasons(true);
-	try {
-		const { response } = await getSeasons();
-		setLoadingSeasons(false);
-		return response as string[];
-	} catch (error) {
-		console.log(error);
-		return [];
-	}
-}
-
-// interface LeagueResponse {
-// 	league: League;
-// }
-// async function getLeagueOptions(
-// 	country: string,
-// 	setLoadingLeagues: (value: boolean) => void
-// ): Promise<string[]> {
-// 	setLoadingLeagues(true);
-// 	try {
-// 		const { response } = await getLeaguesByCountry(country);
-// 		const leagues = response.map(
-// 			({ league }: LeagueResponse) => league.name
-// 		);
-// 		setLoadingLeagues(false);
-// 		return leagues;
-// 	} catch (error) {
-// 		console.log(error);
-// 		return [];
-// 	}
-// }
-
-async function getTeamsOptions(
-	league: string,
-	season: string,
-	setLoadingTeams: (value: boolean) => void
-): Promise<string[]> {
-	setLoadingTeams(true);
-	try {
-		const { response } = await getTeamsByLeague(league, season);
-		const teams = response.map((item: any) => item.team.name);
-		setLoadingTeams(false);
-		return teams;
-	} catch (error) {
-		console.log(error);
-		return [];
-	}
 }
