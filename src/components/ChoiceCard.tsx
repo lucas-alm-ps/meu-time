@@ -29,7 +29,6 @@ export default function ChoiceCard({
 		setSelected(true);
 		if (setChoiceId && ids && ids.length > selectedIndex) {
 			const selectedId = ids[selectedIndex];
-			console.log('ID: ', selectedId);
 			setChoiceId(selectedId);
 		}
 	}

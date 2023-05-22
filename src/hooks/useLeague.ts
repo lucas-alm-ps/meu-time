@@ -37,18 +37,14 @@ export default function useLeague(selectedCountry: string) {
 		}
 	}
 
-	console.log('SELECTED LEAGUE: ', selectedLeague);
-
 	useEffect(() => {
 		if (selectedCountry !== '') fetchLeagues();
 	}, [selectedCountry]);
 
 	useEffect(() => {
 		if (data) {
-			console.log(data);
 			const ids = data.map(({ league }) => String(league.id));
 			setIds(ids);
-			console.log('LIST OF IDS: ', ids);
 		}
 	}, [data]);
 

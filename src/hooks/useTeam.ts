@@ -7,6 +7,19 @@ interface TeamProps {
 	selectedSeason: string;
 }
 
+interface Team {
+	code: string;
+	country: string;
+	founded: number;
+	id: number;
+	logo: string;
+	name: string;
+	national: boolean;
+}
+interface TeamResponse {
+	team: Team;
+}
+
 export default function useTeam({
 	selectedLeagueId,
 	selectedSeason,
@@ -20,7 +33,7 @@ export default function useTeam({
 	async function fetchTeams() {
 		try {
 			setLoading(true);
-			const response = await getTeamsByLeague(
+			const { response } = await getTeamsByLeague(
 				selectedLeagueId,
 				selectedSeason
 			);
@@ -28,6 +41,7 @@ export default function useTeam({
 			const teams = response.map((item: any) => item.team.name);
 			setData(response);
 			setTeamOptions(teams);
+			console.log(teams);
 		} catch (error) {
 			setError(error as Error);
 		} finally {
@@ -36,9 +50,10 @@ export default function useTeam({
 	}
 
 	useEffect(() => {
-		fetchTeams();
+		if (selectedLeagueId && selectedSeason) fetchTeams();
+		console.log(data);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [selectedLeagueId, selectedSeason]);
 
 	return {
 		teamOptions,
