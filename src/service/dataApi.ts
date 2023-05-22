@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from 'axios';
 import { api, handleRequest } from './api';
 
 interface GetPlayersParams {
@@ -30,5 +29,17 @@ export async function getTeamsByLeague(league: string, season: string) {
 	console.log(league, season);
 	return await handleRequest(() =>
 		api.get(`v3/teams/`, { params: { league, season } })
+	);
+}
+
+export async function getTeamStats(
+	teamId: string,
+	leagueId: string,
+	season: string
+) {
+	return await handleRequest(() =>
+		api.get(`v3/teams/statistics`, {
+			params: { team: teamId, season, leagueId: leagueId },
+		})
 	);
 }

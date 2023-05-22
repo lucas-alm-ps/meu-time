@@ -25,6 +25,9 @@ interface ChoiceContent {
 	selectedLeagueId: string;
 	setSelectedLeagueId: (leagueId: string) => void;
 	leagueOptionsId: string[];
+	selectedTeamId: string;
+	setSelectedTeamId: (teamId: string) => void;
+	teamOptionsId: string[];
 }
 
 interface ChoiceProviderProps {
@@ -51,6 +54,9 @@ const ChoiceContext = createContext<ChoiceContent>({
 	selectedLeagueId: '',
 	setSelectedLeagueId: () => {},
 	leagueOptionsId: [],
+	selectedTeamId: '',
+	setSelectedTeamId: () => {},
+	teamOptionsId: [],
 });
 export default ChoiceContext;
 
@@ -72,9 +78,15 @@ export function ChoiceProvider({ children }: ChoiceProviderProps) {
 		setSelectedLeagueId,
 		leagueOptionsId,
 	} = useLeague(selectedCountry);
-	const { teamOptions, teamLoading, setSelectedTeam, selectedTeam } = useTeam(
-		{ selectedLeagueId, selectedSeason }
-	);
+	const {
+		teamOptions,
+		teamLoading,
+		setSelectedTeam,
+		selectedTeam,
+		setSelectedTeamId,
+		teamOptionsId,
+		selectedTeamId,
+	} = useTeam({ selectedLeagueId, selectedSeason });
 
 	return (
 		<ChoiceContext.Provider
@@ -98,6 +110,9 @@ export function ChoiceProvider({ children }: ChoiceProviderProps) {
 				selectedLeagueId,
 				setSelectedLeagueId,
 				leagueOptionsId,
+				setSelectedTeamId,
+				teamOptionsId,
+				selectedTeamId,
 			}}>
 			{children}
 		</ChoiceContext.Provider>

@@ -9,7 +9,12 @@ import { useContext } from 'react';
 import ChoiceContext from '../../context/ChoiceContext';
 
 export default function ResultPage() {
-	const { country } = useContext(ChoiceContext);
+	const {
+		selectedCountry,
+		selectedLeagueId,
+		selectedTeamId,
+		selectedSeason,
+	} = useContext(ChoiceContext);
 
 	return (
 		<MainPage>

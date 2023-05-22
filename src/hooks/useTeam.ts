@@ -29,6 +29,8 @@ export default function useTeam({
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
+	const [selectedTeamId, setSelectedTeamId] = useState('');
+	const [ids, setIds] = useState<string[]>([]);
 
 	async function fetchTeams() {
 		try {
@@ -39,8 +41,10 @@ export default function useTeam({
 			);
 			console.log(response);
 			const teams = response.map((item: any) => item.team.name);
+			const ids = response.map((item: any) => String(item.team.id));
 			setData(response);
 			setTeamOptions(teams);
+			setIds(ids);
 			console.log(teams);
 		} catch (error) {
 			setError(error as Error);
@@ -61,5 +65,8 @@ export default function useTeam({
 		teamError: error,
 		setSelectedTeam,
 		selectedTeam,
+		teamOptionsId: ids,
+		setSelectedTeamId,
+		selectedTeamId,
 	};
 }

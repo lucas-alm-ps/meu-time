@@ -9,11 +9,11 @@ interface BarProps {
 }
 
 export default function Bar({ teamName }: BarProps) {
-	const { team } = useContext(ChoiceContext);
+	const { selectedTeam } = useContext(ChoiceContext);
 
 	return (
 		<StyledBar>
-			<StyledTeamName>{team}</StyledTeamName>
+			<StyledTeamName>{selectedTeam && selectedTeam}</StyledTeamName>
 			<Link to='/'>
 				<Logo />
 			</Link>

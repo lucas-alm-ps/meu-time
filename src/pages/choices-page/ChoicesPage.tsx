@@ -3,6 +3,7 @@ import ChoiceCard from '../../components/ChoiceCard';
 import ChoiceContext from '../../context/ChoiceContext';
 import MainPage from '../main-page/MainPage';
 import Spinner from '../../components/Spinner';
+import { Navigate } from 'react-router-dom';
 
 export default function ChoicesPage() {
 	const {
@@ -23,9 +24,16 @@ export default function ChoicesPage() {
 		selectedSeason,
 		setSelectedLeagueId,
 		leagueOptionsId,
+		selectedTeamId,
+		selectedLeagueId,
+		setSelectedTeamId,
+		teamOptionsId,
 	} = useContext(ChoiceContext);
 
 	if (countryLoading) return <Spinner />;
+
+	if (selectedCountry && selectedLeagueId && selectedSeason && selectedTeamId)
+		return <Navigate to='/result' />;
 
 	return (
 		<MainPage>
@@ -67,6 +75,8 @@ export default function ChoicesPage() {
 					choices={teamOptions}
 					instruction='Selecione o time desejado'
 					setChoice={setSelectedTeam}
+					setChoiceId={setSelectedTeamId}
+					ids={teamOptionsId}
 				/>
 			) : null}
 		</MainPage>
