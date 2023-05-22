@@ -30,8 +30,6 @@ export default function useCountry() {
 		}
 	}
 
-	console.log('COUNTRY CHANGED', selectedCountry);
-
 	useEffect(() => {
 		fetchCountries();
 	}, []);

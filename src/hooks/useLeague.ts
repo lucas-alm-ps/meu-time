@@ -16,16 +16,15 @@ export default function useLeague(selectedCountry: string) {
 	const [selectedLeague, setSelectedLeague] = useState('');
 	const [selectedLeagueId, setSelectedLeagueId] = useState('');
 	const [leagueOptions, setLeagueOptions] = useState<string[]>([]);
-	const [data, setData] = useState<League[]>([]);
+	const [data, setData] = useState<LeagueResponse[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
+	const [ids, setIds] = useState<string[]>([]);
 
 	async function fetchLeagues() {
 		try {
 			setLoading(true);
 			const { response } = await getLeaguesByCountry(selectedCountry);
-			console.log('selectedCountry', selectedCountry);
-			console.log('response', response);
 			const leagues = response.map(
 				({ league }: LeagueResponse) => league.name
 			);
@@ -38,10 +37,20 @@ export default function useLeague(selectedCountry: string) {
 		}
 	}
 
+	console.log('SELECTED LEAGUE: ', selectedLeague);
+
 	useEffect(() => {
-		console.log('NEW CHANGE', selectedCountry);
-		fetchLeagues();
+		if (selectedCountry !== '') fetchLeagues();
 	}, [selectedCountry]);
+
+	useEffect(() => {
+		if (data) {
+			console.log(data);
+			const ids = data.map(({ league }) => String(league.id));
+			setIds(ids);
+			console.log('LIST OF IDS: ', ids);
+		}
+	}, [data]);
 
 	return {
 		leagueOptions,
@@ -50,5 +59,7 @@ export default function useLeague(selectedCountry: string) {
 		setSelectedLeague,
 		selectedLeagueId,
 		selectedLeague,
+		setSelectedLeagueId,
+		leagueOptionsId: ids,
 	};
 }

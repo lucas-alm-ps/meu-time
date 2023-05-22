@@ -4,7 +4,6 @@ import useCountry from '../hooks/useCountry';
 import useSeason from '../hooks/useSeason';
 import useLeague from '../hooks/useLeague';
 import useTeam from '../hooks/useTeam';
-import { useState } from 'react';
 
 interface ChoiceContent {
 	countryOptions: string[];
@@ -24,6 +23,8 @@ interface ChoiceContent {
 	selectedLeague: string;
 	selectedTeam: string;
 	selectedLeagueId: string;
+	setSelectedLeagueId: (leagueId: string) => void;
+	leagueOptionsId: string[];
 }
 
 interface ChoiceProviderProps {
@@ -48,6 +49,8 @@ const ChoiceContext = createContext<ChoiceContent>({
 	selectedLeague: '',
 	selectedTeam: '',
 	selectedLeagueId: '',
+	setSelectedLeagueId: () => {},
+	leagueOptionsId: [],
 });
 export default ChoiceContext;
 
@@ -66,6 +69,8 @@ export function ChoiceProvider({ children }: ChoiceProviderProps) {
 		setSelectedLeague,
 		selectedLeagueId,
 		selectedLeague,
+		setSelectedLeagueId,
+		leagueOptionsId,
 	} = useLeague(selectedCountry);
 	const { teamOptions, teamLoading, setSelectedTeam, selectedTeam } = useTeam(
 		{ selectedLeagueId, selectedSeason }
@@ -91,6 +96,8 @@ export function ChoiceProvider({ children }: ChoiceProviderProps) {
 				selectedSeason,
 				selectedTeam,
 				selectedLeagueId,
+				setSelectedLeagueId,
+				leagueOptionsId,
 			}}>
 			{children}
 		</ChoiceContext.Provider>

@@ -8,6 +8,8 @@ interface ChoiceCardProps {
 	choices: string[];
 	title: string;
 	setChoice: (choice: string) => void;
+	setChoiceId?: (choiceId: string) => void;
+	ids?: string[];
 }
 
 export default function ChoiceCard({
@@ -15,13 +17,21 @@ export default function ChoiceCard({
 	choices,
 	title,
 	setChoice,
+	setChoiceId,
+	ids,
 }: ChoiceCardProps) {
 	const [selected, setSelected] = useState(false);
 
 	function handleOptionSelect(event: React.ChangeEvent<HTMLSelectElement>) {
+		const selectedIndex = event.target.selectedIndex;
 		const selectedChoice = event.target.value;
 		setChoice(selectedChoice);
 		setSelected(true);
+		if (setChoiceId && ids && ids.length > selectedIndex) {
+			const selectedId = ids[selectedIndex];
+			console.log('ID: ', selectedId);
+			setChoiceId(selectedId);
+		}
 	}
 
 	return (
@@ -32,7 +42,10 @@ export default function ChoiceCard({
 
 				<StyledSelect onChange={handleOptionSelect} selected={selected}>
 					{choices.map((choice, index) => (
-						<option value={choice} key={index}>
+						<option
+							value={choice}
+							key={index}
+							id={ids && ids[index]}>
 							{choice}
 						</option>
 					))}

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import ChoiceCard from '../../components/ChoiceCard';
 import ChoiceContext from '../../context/ChoiceContext';
 import MainPage from '../main-page/MainPage';
+import Spinner from '../../components/Spinner';
 
 export default function ChoicesPage() {
 	const {
@@ -20,10 +21,11 @@ export default function ChoicesPage() {
 		selectedCountry,
 		selectedLeague,
 		selectedSeason,
-		selectedTeam,
+		setSelectedLeagueId,
+		leagueOptionsId,
 	} = useContext(ChoiceContext);
 
-	if (countryLoading) return <MainPage>Carregando...</MainPage>;
+	if (countryLoading) return <Spinner />;
 
 	return (
 		<MainPage>
@@ -33,7 +35,7 @@ export default function ChoicesPage() {
 				instruction='Selecione o país desejado'
 				setChoice={setSelectedCountry}
 			/>
-			{seasonLoading && <MainPage>Carregando...</MainPage>}
+			{seasonLoading && <Spinner />}
 
 			{selectedCountry && (
 				<ChoiceCard
@@ -45,18 +47,20 @@ export default function ChoicesPage() {
 			)}
 
 			{leagueLoading ? (
-				<MainPage>Carregando...</MainPage>
+				<Spinner />
 			) : selectedCountry && selectedSeason ? (
 				<ChoiceCard
 					title='Liga'
 					choices={leagueOptions}
 					instruction='Selecione a liga desejada'
 					setChoice={setSelectedLeague}
+					setChoiceId={setSelectedLeagueId}
+					ids={leagueOptionsId}
 				/>
 			) : null}
 
 			{teamLoading ? (
-				<MainPage>Carregando...</MainPage>
+				<Spinner />
 			) : selectedCountry && selectedSeason && selectedLeague ? (
 				<ChoiceCard
 					title='Time'
@@ -68,7 +72,3 @@ export default function ChoicesPage() {
 		</MainPage>
 	);
 }
-
-// useEffect(() => {
-// 	setSelectedLeague('');
-// }, [selectedCountry, selectedSeason]);
