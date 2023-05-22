@@ -13,7 +13,6 @@ interface GoalsGraphProps {
 }
 
 export default function GoalsGraph({ data }: GoalsGraphProps) {
-	console.log('DATA FROM GRAPH ', data);
 	const dataArray = [
 		['Minuto', 'Gols'],
 		...Object.entries(data).map(([minute, { total }]) => [

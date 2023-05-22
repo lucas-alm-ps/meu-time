@@ -21,6 +21,7 @@ export default function useStatistics(
 				selectedLeagueId,
 				selectedSeason
 			);
+			console.log(response);
 			setData(response);
 			console.log(response);
 			const {
@@ -30,6 +31,7 @@ export default function useStatistics(
 				},
 				lineups,
 			} = response;
+			console.log(lineups);
 			setFixtures(fixtures);
 			setLineups(lineups);
 			setMinutesGoalsPercentage(minute);

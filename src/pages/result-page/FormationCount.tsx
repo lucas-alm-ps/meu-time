@@ -1,15 +1,39 @@
 import styled from 'styled-components';
 import CardShower from '../../components/CardShower';
 
-export default function FormationCount() {
+interface Lineup {
+	formation: string;
+	played: number;
+}
+
+interface FormationCountProps {
+	data: Lineup[];
+}
+
+export default function FormationCount({ data }: FormationCountProps) {
+	const mostPlayedFormation = data && getMostPlayedFormation(data);
 	return (
 		<CardShower title='Formações'>
 			<Box>
-				<Formation>4-3-3</Formation>
-				<FormationNCount>53 vezes</FormationNCount>
+				<Formation>
+					{mostPlayedFormation && mostPlayedFormation.formation}
+				</Formation>
+				<FormationNCount>
+					{mostPlayedFormation && mostPlayedFormation.played} vezes
+				</FormationNCount>
 			</Box>
 		</CardShower>
 	);
+}
+
+function getMostPlayedFormation(data: Lineup[]) {
+	if (!data || data.length <= 0) return null;
+	return data.reduce((acc, curr) => {
+		if (curr.played > acc.played) {
+			return curr;
+		}
+		return acc;
+	});
 }
 
 const Formation = styled.h4`
