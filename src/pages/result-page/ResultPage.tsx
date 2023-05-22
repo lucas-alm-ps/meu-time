@@ -8,22 +8,19 @@ import FormationCount from './FormationCount';
 import { useContext } from 'react';
 import ChoiceContext from '../../context/ChoiceContext';
 import useStatistics from '../../hooks/useStatistics';
+import Spinner from '../../components/Spinner';
 
 export default function ResultPage() {
-	const {
-		selectedCountry,
-		selectedLeagueId,
-		selectedTeamId,
-		selectedSeason,
-	} = useContext(ChoiceContext);
+	const { selectedLeagueId, selectedTeamId, selectedSeason } =
+		useContext(ChoiceContext);
 
-	const { data } = useStatistics(
+	const { fixtures, statisticsLoading, statistics } = useStatistics(
 		selectedLeagueId,
 		selectedSeason,
 		selectedTeamId
 	);
-
-	console.log(data);
+	console.log(fixtures);
+	if (statisticsLoading || !statistics) return <Spinner />;
 
 	return (
 		<MainPage>
@@ -32,7 +29,9 @@ export default function ResultPage() {
 				<PlayerTable />
 
 				<BoxTitle>Resultados gerais</BoxTitle>
-				<MatchesResultTable />
+				{fixtures && Object.keys(fixtures).length > 0 && (
+					<MatchesResultTable data={fixtures as any} />
+				)}
 
 				<BoxTitle>Estatisticas</BoxTitle>
 				<StatisticsBox>

@@ -26,28 +26,29 @@ export default function Table<T extends Record<string, unknown>>({
 				</tr>
 			</thead>
 			<tbody>
-				{data.map((item, index) => (
-					<tr key={index}>
-						{Object.keys(item).map((key, columnIndex) => (
-							<td
-								key={columnIndex}
-								style={{
-									color:
-										columnColors &&
-										columnColors[columnIndex],
-								}}>
-								{key === 'image' ? (
-									<img
-										src={item[key] as string}
-										alt='Player'
-									/>
-								) : (
-									(item[key] as ReactNode)
-								)}
-							</td>
-						))}
-					</tr>
-				))}
+				{data &&
+					data.map((item, index) => (
+						<tr key={index}>
+							{Object.keys(item).map((key, columnIndex) => (
+								<td
+									key={columnIndex}
+									style={{
+										color:
+											columnColors &&
+											columnColors[columnIndex],
+									}}>
+									{key === 'image' ? (
+										<img
+											src={item[key] as string}
+											alt='Player'
+										/>
+									) : (
+										(item[key] as ReactNode)
+									)}
+								</td>
+							))}
+						</tr>
+					))}
 			</tbody>
 		</StyledTable>
 	);

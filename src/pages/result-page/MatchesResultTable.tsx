@@ -3,7 +3,7 @@ import Table from '../../components/Table';
 interface MatchResult extends Record<string, unknown> {
 	wins: number;
 	draws: number;
-	losses: number;
+	loses: number;
 	games: number;
 }
 
@@ -14,28 +14,33 @@ interface MatchesResultTableProps {
 export default function MatchesResultTable({ data }: MatchesResultTableProps) {
 	const titles = ['Jogos', 'Vitórias', 'Empates', 'Derrotas'];
 	const columnColors = ['#fff', '#73F50C', '#D01E1F'];
-	const matchResults = getMatchResults(data);
+	const matchResults = data && getMatchResults(data);
+
+	console.log('DATA FROM TABLE ', data);
 
 	return (
 		<Table<MatchResult>
 			data={matchResults}
 			titles={titles}
 			columnColors={columnColors}
-			fontSize='32px'></Table>
+			fontSize='32px'
+		/>
 	);
 }
 
 function getMatchResults(data: MatchObject) {
+	if (!data) return [];
+
 	const draws = data.draws.total;
 	const wins = data.wins.total;
-	const losses = data.losses.total;
+	const loses = data.loses.total;
 	const games = data.played.total;
 
 	return [
 		{
 			wins,
 			draws,
-			losses,
+			loses,
 			games,
 		},
 	];
@@ -50,6 +55,6 @@ interface Fixture {
 interface MatchObject {
 	wins: Fixture;
 	draws: Fixture;
-	losses: Fixture;
+	loses: Fixture;
 	played: Fixture;
 }
