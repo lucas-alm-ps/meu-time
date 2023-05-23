@@ -41,7 +41,7 @@ export default function ResultPage() {
 	if (statisticsLoading || playersLoading) return <Spinner />;
 
 	return (
-		<MainPage>
+		<MainPage smallerPage>
 			<Page>
 				<BoxTitle>Jogadores</BoxTitle>
 				<PlayerTable data={players} />

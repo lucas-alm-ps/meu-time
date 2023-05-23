@@ -9,7 +9,7 @@ export default function useTeam(
 ) {
 	const [selectedTeam, setSelectedTeam] = useState('');
 	const [teamOptions, setTeamOptions] = useState<string[]>([]);
-	const [data, setData] = useState([]);
+	const [, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
 	const [selectedTeamId, setSelectedTeamId] = useState('');

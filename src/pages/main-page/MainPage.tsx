@@ -3,20 +3,31 @@ import styled from 'styled-components';
 import { StyledPage } from '../../styles/Page';
 import Bar from '../../components/Bar';
 
-export default function MainPage({ children }: { children?: ReactNode }) {
+export default function MainPage({
+	children,
+	smallerPage,
+}: {
+	children?: ReactNode;
+	smallerPage?: boolean;
+}) {
 	return (
-		<Page>
+		<Page smallerPage={smallerPage}>
 			<Bar />
 			{children}
 		</Page>
 	);
 }
 
-const Page = styled(StyledPage)`
+interface PageProps {
+	smallerPage?: boolean;
+}
+
+const Page = styled(StyledPage)<PageProps>`
 	width: 100vw;
 	height: 100%;
 	flex-direction: column;
-	padding: 20px 85px 30px 85px;
+	${({ smallerPage }) =>
+		smallerPage ? 'padding: 30px 140px' : 'padding: 30px 85px'};
 	margin-top: 120px;
 	margin-bottom: 20px;
 `;
