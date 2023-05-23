@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect, useState } from 'react';
 import { getTeamsByLeague } from '../service/dataApi';
 import ApiKeyContext from '../context/ApiKeyContext';
@@ -7,15 +8,15 @@ interface TeamProps {
 	selectedSeason: string;
 }
 
-interface Team {
-	code: string;
-	country: string;
-	founded: number;
-	id: number;
-	logo: string;
-	name: string;
-	national: boolean;
-}
+// interface Team {
+// 	code: string;
+// 	country: string;
+// 	founded: number;
+// 	id: number;
+// 	logo: string;
+// 	name: string;
+// 	national: boolean;
+// }
 
 export default function useTeam({
 	selectedLeagueId,
@@ -37,10 +38,8 @@ export default function useTeam({
 				selectedLeagueId,
 				selectedSeason
 			);
-			console.log(response);
 			const teams = response.map((item: any) => item.team.name);
 			const ids = response.map((item: any) => String(item.team.id));
-			console.log(ids);
 			setData(response);
 			setTeamOptions(teams);
 			setIds(ids);

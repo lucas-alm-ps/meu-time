@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
 import { BoxTitle } from '../../styles';
 import MainPage from '../main-page/MainPage';
@@ -67,7 +68,6 @@ export default function ResultPage() {
 	}
 
 	function resetSearch() {
-		console.log('reset');
 		setSelectedTeamId('');
 		setSelectedTeam('');
 		setSelectedCountry('');

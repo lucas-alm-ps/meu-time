@@ -12,7 +12,6 @@ export default function ProtectedRoute({
 	outlet,
 }: ProtectedRouteProps) {
 	const { isAuthenticated } = useContext(ApiKeyContext);
-	console.log('auth: ', isAuthenticated);
 
 	if (isAuthenticated) {
 		return outlet;

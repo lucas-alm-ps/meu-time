@@ -38,8 +38,6 @@ export default function PlayerTable({ data }: PlayerTableProps) {
 	const titles = [' ', 'Nome', 'Idade', 'Nacionalidade', 'Altura', 'Peso'];
 	const columnColors = ['', '#F5950C', '#fff', '#F5950C'];
 
-	console.log(data);
-
 	const footballPlayers = data && getPlayersData(data);
 
 	return (

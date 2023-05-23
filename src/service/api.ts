@@ -16,6 +16,7 @@ async function handleRequest<T>(
 ): Promise<T> {
 	try {
 		const response = await request();
+		console.log('Response:', response);
 		return response.data;
 	} catch (error) {
 		throw new Error(`Request failed with status ${error}`);

@@ -20,12 +20,14 @@ export default function useCountry() {
 		try {
 			setLoading(true);
 			const { response } = await getCountries();
+			console.log('Response:', response);
 			setData(response);
 			const countries: string[] = response.map(
 				(country: Country) => country.name
 			);
 			setCountryOptions(countries);
 		} catch (error: unknown) {
+			console.log('Error:', error);
 			setError(error as Error);
 		} finally {
 			setLoading(false);
@@ -34,6 +36,7 @@ export default function useCountry() {
 
 	useEffect(() => {
 		if (isAuthenticated) fetchCountries();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {

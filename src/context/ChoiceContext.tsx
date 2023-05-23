@@ -67,8 +67,10 @@ export function ChoiceProvider({ children }: ChoiceProviderProps) {
 		setSelectedCountry,
 		selectedCountry,
 	} = useCountry();
+
 	const { seasonOptions, seasonLoading, setSelectedSeason, selectedSeason } =
 		useSeason();
+
 	const {
 		leagueOptions,
 		leagueLoading,
@@ -78,6 +80,7 @@ export function ChoiceProvider({ children }: ChoiceProviderProps) {
 		setSelectedLeagueId,
 		leagueOptionsId,
 	} = useLeague(selectedCountry);
+
 	const {
 		teamOptions,
 		teamLoading,

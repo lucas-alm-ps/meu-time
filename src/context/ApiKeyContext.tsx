@@ -48,8 +48,8 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 
 	async function fetchApiKey() {
 		try {
-			const response = await isApiKeyValid();
-			setIsAuthenticated(response);
+			await isApiKeyValid();
+			setIsAuthenticated(true);
 		} catch (err) {
 			console.error('Error', err);
 			setIsAuthenticated(false);
