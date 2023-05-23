@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { getLeaguesByCountry } from '../service/dataApi';
-import ChoiceContext from '../context/ChoiceContext';
 import ApiKeyContext from '../context/ApiKeyContext';
 
 interface League {
