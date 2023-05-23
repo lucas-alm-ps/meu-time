@@ -122,9 +122,10 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-3. Create a `.env` file in the project root and add your API key as 
+3. Create a `.env` file in the project root and add your API key, aditionally you can set mode to dev so you won't be requested the API key every time
    ```js
    REACT_APP_API_KEY=your-api-key
+   VITE_DEV_MODE=true
    ```
 4. Start the development server
    ```sh
