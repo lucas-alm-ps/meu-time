@@ -89,7 +89,14 @@ export function ChoiceProvider({ children }: ChoiceProviderProps) {
 		setSelectedTeamId,
 		teamOptionsId,
 		selectedTeamId,
-	} = useTeam({ selectedLeagueId, selectedSeason });
+	} = useTeam(selectedLeagueId, selectedSeason);
+
+	console.log(
+		'FROM THE CHOICE CONTEXT\nleague id: ',
+		selectedLeagueId,
+		'season: ',
+		selectedSeason
+	);
 
 	return (
 		<ChoiceContext.Provider

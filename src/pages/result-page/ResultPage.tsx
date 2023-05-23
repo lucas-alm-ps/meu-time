@@ -29,8 +29,9 @@ export default function ResultPage() {
 
 	const { fixtures, statisticsLoading, minutesGoalsPercentage, lineups } =
 		useStatistics(selectedLeagueId, selectedSeason, selectedTeamId);
+
 	const { players, playersLoading } = usePlayers(
-		selectedLeagueId,
+		selectedTeamId,
 		selectedSeason
 	);
 

@@ -40,7 +40,8 @@ export default function useLeague(selectedCountry: string) {
 
 	useEffect(() => {
 		if (selectedCountry !== '' && isAuthenticated) fetchLeagues();
-	}, [selectedCountry]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedCountry, isAuthenticated]);
 
 	useEffect(() => {
 		if (data) {

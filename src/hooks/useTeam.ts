@@ -3,28 +3,13 @@ import { useContext, useEffect, useState } from 'react';
 import { getTeamsByLeague } from '../service/dataApi';
 import ApiKeyContext from '../context/ApiKeyContext';
 
-interface TeamProps {
-	selectedLeagueId: string;
-	selectedSeason: string;
-}
-
-// interface Team {
-// 	code: string;
-// 	country: string;
-// 	founded: number;
-// 	id: number;
-// 	logo: string;
-// 	name: string;
-// 	national: boolean;
-// }
-
-export default function useTeam({
-	selectedLeagueId,
-	selectedSeason,
-}: TeamProps) {
+export default function useTeam(
+	selectedLeagueId: string,
+	selectedSeason: string
+) {
 	const [selectedTeam, setSelectedTeam] = useState('');
 	const [teamOptions, setTeamOptions] = useState<string[]>([]);
-	const [, setData] = useState([]);
+	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
 	const [selectedTeamId, setSelectedTeamId] = useState('');

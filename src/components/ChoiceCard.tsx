@@ -19,17 +19,18 @@ export default function ChoiceCard({
 	setChoice,
 	setChoiceId,
 	ids,
-	choice,
 }: ChoiceCardProps) {
 	const [selected, setSelected] = useState(false);
 
 	function handleOptionSelect(event: React.ChangeEvent<HTMLSelectElement>) {
-		const selectedIndex = event.target.selectedIndex;
+		const selectedIndex = event.target.selectedIndex - 1;
 		const selectedChoice = event.target.value;
 		setChoice(selectedChoice);
 		setSelected(true);
 		if (setChoiceId && ids && ids.length > selectedIndex) {
+			console.log('ids', ids, 'options: ', choices);
 			const selectedId = ids[selectedIndex];
+			console.log('selectedId', selectedId);
 			setChoiceId(selectedId);
 		}
 	}
@@ -45,14 +46,13 @@ export default function ChoiceCard({
 				{choices.length > 0 && (
 					<StyledSelect
 						onChange={handleOptionSelect}
-						selected={selected}
-						value={choice}>
+						selected={selected}>
 						<option value=''>Selecione</option>
 						{choices.map((choice, index) => (
 							<option
 								value={choice}
 								key={index}
-								id={ids && ids[index - 1]}>
+								id={ids && ids[index]}>
 								{choice}
 							</option>
 						))}

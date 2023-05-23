@@ -26,7 +26,7 @@ export default function useSeason() {
 
 	useEffect(() => {
 		if (isAuthenticated) fetchSeasons();
-	}, []);
+	}, [isAuthenticated]);
 
 	return {
 		seasonOptions,

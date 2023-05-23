@@ -12,6 +12,7 @@ export default function usePlayers(teamId: string, season: string) {
 		try {
 			setLoading(true);
 			const { response } = await getPlayers(teamId, season);
+			console.log(response);
 			setPlayers(response);
 		} catch (error) {
 			setError(error as Error);

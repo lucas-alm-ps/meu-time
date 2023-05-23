@@ -26,7 +26,6 @@ export default function useCountry() {
 			);
 			setCountryOptions(countries);
 		} catch (error: unknown) {
-			console.log('Error:', error);
 			setError(error as Error);
 		} finally {
 			setLoading(false);
