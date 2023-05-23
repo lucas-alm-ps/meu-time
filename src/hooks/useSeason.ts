@@ -7,6 +7,7 @@ export default function useSeason() {
 	const [data, setData] = useState<string[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
+
 	async function fetchSeasons() {
 		try {
 			setLoading(true);

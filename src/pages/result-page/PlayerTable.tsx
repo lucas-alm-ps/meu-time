@@ -27,8 +27,12 @@ interface PlayerResponse {
 	photo: string;
 }
 
+type PlayerResponseArray = {
+	player: PlayerResponse;
+}[];
+
 interface PlayerTableProps {
-	data: PlayerResponse[];
+	data: PlayerResponseArray;
 }
 
 export default function PlayerTable({ data }: PlayerTableProps) {
@@ -41,20 +45,22 @@ export default function PlayerTable({ data }: PlayerTableProps) {
 		<Table<FootballPlayer>
 			titles={titles}
 			data={footballPlayers}
-			columnColors={columnColors}></Table>
+			columnColors={columnColors}
+		/>
 	);
 }
 
-function getPlayersData(data: PlayerResponse[]) {
+function getPlayersData(data: PlayerResponseArray) {
 	if (data.length === 0 || !data) return [];
-	return data.map((player) => {
+	return data.map((item) => {
+		const player = item.player;
 		const newPlayer: FootballPlayer = {
 			image: player.photo,
 			name: player.name,
 			age: player.age,
 			nationality: player.nationality,
-			height: Number(player.height),
-			weight: Number(player.weight),
+			height: Number(player.height.replace(' cm', '')),
+			weight: Number(player.weight.replace(' kg', '')),
 		};
 		return newPlayer;
 	});
