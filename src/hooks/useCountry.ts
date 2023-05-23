@@ -20,7 +20,6 @@ export default function useCountry() {
 		try {
 			setLoading(true);
 			const { response } = await getCountries();
-			console.log('Response:', response);
 			setData(response);
 			const countries: string[] = response.map(
 				(country: Country) => country.name
@@ -37,7 +36,7 @@ export default function useCountry() {
 	useEffect(() => {
 		if (isAuthenticated) fetchCountries();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [isAuthenticated]);
 
 	return {
 		countryOptions,
