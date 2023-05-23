@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom';
 import ChoiceContext from '../context/ChoiceContext';
 import { useContext } from 'react';
 
-interface BarProps {
-	teamName?: string;
-}
-
-export default function Bar({ teamName }: BarProps) {
+export default function Bar() {
 	const { selectedTeam } = useContext(ChoiceContext);
 
 	return (
@@ -26,10 +22,11 @@ const StyledBar = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 45px 85px 0 85px;
+	padding: 15px 85px 15px 85px;
 	position: fixed;
 	top: 0;
 	left: 0;
+	background-color: #1d1d1d;
 `;
 
 const StyledTeamName = styled.h1`

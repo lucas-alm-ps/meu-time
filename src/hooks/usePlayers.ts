@@ -10,7 +10,6 @@ export default function usePlayers(teamId: string, season: string) {
 		try {
 			setLoading(true);
 			const { response } = await getPlayers(teamId, season);
-			console.log(response);
 			setPlayers(response);
 		} catch (error) {
 			setError(error as Error);
@@ -21,6 +20,7 @@ export default function usePlayers(teamId: string, season: string) {
 
 	useEffect(() => {
 		if (teamId && season) fetchPlayers();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [teamId, season]);
 
 	return {

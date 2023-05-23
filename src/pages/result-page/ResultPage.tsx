@@ -10,10 +10,17 @@ import ChoiceContext from '../../context/ChoiceContext';
 import useStatistics from '../../hooks/useStatistics';
 import Spinner from '../../components/Spinner';
 import usePlayers from '../../hooks/usePlayers';
+import { Navigate } from 'react-router-dom';
+import { FaSearch as SearchIcon } from 'react-icons/fa';
 
 export default function ResultPage() {
-	const { selectedLeagueId, selectedTeamId, selectedSeason } =
-		useContext(ChoiceContext);
+	const {
+		selectedLeagueId,
+		selectedTeamId,
+		selectedSeason,
+		setSelectedTeam,
+		setSelectedTeamId,
+	} = useContext(ChoiceContext);
 
 	const { fixtures, statisticsLoading, minutesGoalsPercentage, lineups } =
 		useStatistics(selectedLeagueId, selectedSeason, selectedTeamId);
@@ -21,6 +28,9 @@ export default function ResultPage() {
 		selectedLeagueId,
 		selectedSeason
 	);
+
+	if (!selectedLeagueId || !selectedTeamId || !selectedSeason)
+		return <Navigate to='/choose' />;
 
 	if (statisticsLoading || playersLoading) return <Spinner />;
 
@@ -41,8 +51,21 @@ export default function ResultPage() {
 					<FormationCount data={lineups} />
 				</StatisticsBox>
 			</Page>
+			<SearchButton onClick={changeSearch}>
+				<SearchIcon size={40} color='white' />
+			</SearchButton>
 		</MainPage>
 	);
+
+	function changeSearch() {
+		resetSearch();
+		return <Navigate to='/choose' />;
+	}
+
+	function resetSearch() {
+		setSelectedTeamId('');
+		setSelectedTeam('');
+	}
 }
 
 const Page = styled.div`
@@ -53,4 +76,17 @@ const Page = styled.div`
 
 const StatisticsBox = styled.div`
 	display: flex;
+`;
+
+const SearchButton = styled.button`
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	border: none;
+	background-color: #d01e1f;
+	cursor: pointer;
+
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
 `;

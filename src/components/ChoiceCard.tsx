@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Instruction } from '../styles/';
-import { useContext, useState } from 'react';
-import ChoiceContext from '../context/ChoiceContext';
+import { useState } from 'react';
 
 interface ChoiceCardProps {
 	instruction: string;
@@ -45,6 +44,7 @@ export default function ChoiceCard({
 					<StyledSelect
 						onChange={handleOptionSelect}
 						selected={selected}>
+						<option value=''>Selecione</option>
 						{choices.map((choice, index) => (
 							<option
 								value={choice}

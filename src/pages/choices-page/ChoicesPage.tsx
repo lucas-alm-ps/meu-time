@@ -36,6 +36,14 @@ export default function ChoicesPage() {
 	if (selectedCountry && selectedLeagueId && selectedSeason && selectedTeamId)
 		return <Navigate to='/result' />;
 
+	const isTeamSectionVisible =
+		selectedCountry &&
+		selectedSeason &&
+		selectedLeague &&
+		!countryLoading &&
+		!leagueLoading &&
+		leagueOptionsId.includes(selectedLeagueId);
+
 	return (
 		<MainPage>
 			<ChoiceCard
@@ -70,11 +78,7 @@ export default function ChoicesPage() {
 
 			{teamLoading ? (
 				<Spinner />
-			) : selectedCountry &&
-			  selectedSeason &&
-			  selectedLeague &&
-			  !countryLoading &&
-			  !leagueLoading ? (
+			) : isTeamSectionVisible ? (
 				<ChoiceCard
 					title='Time'
 					choices={teamOptions}

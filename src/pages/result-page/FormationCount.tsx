@@ -19,7 +19,9 @@ export default function FormationCount({ data }: FormationCountProps) {
 					{mostPlayedFormation && mostPlayedFormation.formation}
 				</Formation>
 				<FormationNCount>
-					{mostPlayedFormation && mostPlayedFormation.played} vezes
+					{mostPlayedFormation
+						? mostPlayedFormation.played + ' jogos'
+						: 'Sem dados'}
 				</FormationNCount>
 			</Box>
 		</CardShower>

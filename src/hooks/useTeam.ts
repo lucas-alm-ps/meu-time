@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getTeamsByLeague } from '../service/dataApi';
-import ChoiceContext from '../context/ChoiceContext';
 
 interface TeamProps {
 	selectedLeagueId: string;
@@ -16,9 +15,6 @@ interface Team {
 	name: string;
 	national: boolean;
 }
-interface TeamResponse {
-	team: Team;
-}
 
 export default function useTeam({
 	selectedLeagueId,
@@ -26,7 +22,7 @@ export default function useTeam({
 }: TeamProps) {
 	const [selectedTeam, setSelectedTeam] = useState('');
 	const [teamOptions, setTeamOptions] = useState<string[]>([]);
-	const [data, setData] = useState([]);
+	const [, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
 	const [selectedTeamId, setSelectedTeamId] = useState('');
@@ -39,6 +35,7 @@ export default function useTeam({
 				selectedLeagueId,
 				selectedSeason
 			);
+			console.log(response);
 			const teams = response.map((item: any) => item.team.name);
 			const ids = response.map((item: any) => String(item.team.id));
 			setData(response);
