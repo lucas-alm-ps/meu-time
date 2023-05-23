@@ -48,7 +48,6 @@ export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 
 	async function fetchApiKey() {
 		try {
-			console.log('Checking api key on server');
 			const response = await isApiKeyValid();
 			setIsAuthenticated(response);
 		} catch (err) {

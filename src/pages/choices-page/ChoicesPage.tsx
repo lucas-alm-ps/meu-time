@@ -1,11 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import ChoiceCard from '../../components/ChoiceCard';
 import ChoiceContext from '../../context/ChoiceContext';
 import MainPage from '../main-page/MainPage';
 import Spinner from '../../components/Spinner';
 import { Navigate } from 'react-router-dom';
-import { count } from 'console';
 
 export default function ChoicesPage() {
 	const {
