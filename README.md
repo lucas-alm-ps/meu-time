@@ -73,7 +73,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://meu-time.vercel.app/)
+[![Product Overview](./src/assets/overview.gif)](https://meu-time.vercel.app/)
+
 
 Meu Time is a sports app that allows users to access information about football leagues, teams, and seasons. With Meu Time, users can search for specific countries, leagues, seasons, and teams to get relevant data. To use the app, users need to provide a valid API key from the API-Football API.
 
