@@ -16,8 +16,6 @@ export default function MatchesResultTable({ data }: MatchesResultTableProps) {
 	const columnColors = ['#fff', '#73F50C', '#D01E1F'];
 	const matchResults = data && getMatchResults(data);
 
-	console.log('DATA FROM TABLE ', data);
-
 	return (
 		<Table<MatchResult>
 			data={matchResults}

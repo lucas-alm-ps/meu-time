@@ -32,14 +32,10 @@ export async function getTeamStats(
 	);
 }
 
-export async function getPlayers(
-	teamId: string,
-	season: string,
-	leagueId: string
-) {
+export async function getPlayers(teamId: string, season: string) {
 	return await handleRequest(() =>
 		api.get(`/v3/players`, {
-			params: { team: teamId, season, league: leagueId },
+			params: { team: teamId, season },
 		})
 	);
 }

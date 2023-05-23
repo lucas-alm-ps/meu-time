@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import ChoiceContext from '../../context/ChoiceContext';
 import useStatistics from '../../hooks/useStatistics';
 import Spinner from '../../components/Spinner';
+import usePlayers from '../../hooks/usePlayers';
 
 export default function ResultPage() {
 	const { selectedLeagueId, selectedTeamId, selectedSeason } =
@@ -16,15 +17,18 @@ export default function ResultPage() {
 
 	const { fixtures, statisticsLoading, minutesGoalsPercentage, lineups } =
 		useStatistics(selectedLeagueId, selectedSeason, selectedTeamId);
+	const { players, playersLoading } = usePlayers(
+		selectedLeagueId,
+		selectedSeason
+	);
 
-	console.log('LINEUPS FROM RESULT PAGE ', lineups);
-	if (statisticsLoading) return <Spinner />;
+	if (statisticsLoading || playersLoading) return <Spinner />;
 
 	return (
 		<MainPage>
 			<Page>
 				<BoxTitle>Jogadores</BoxTitle>
-				<PlayerTable />
+				<PlayerTable data={players} />
 
 				<BoxTitle>Resultados gerais</BoxTitle>
 				{fixtures && Object.keys(fixtures).length > 0 && (

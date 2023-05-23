@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getPlayers } from '../service/dataApi';
 
-export default function usePlayers(
-	teamId: string,
-	season: string,
-	leagueId: string
-) {
+export default function usePlayers(teamId: string, season: string) {
 	const [players, setPlayers] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
@@ -13,7 +9,8 @@ export default function usePlayers(
 	async function fetchPlayers() {
 		try {
 			setLoading(true);
-			const { response } = await getPlayers(teamId, season, leagueId);
+			const { response } = await getPlayers(teamId, season);
+			console.log(response);
 			setPlayers(response);
 		} catch (error) {
 			setError(error as Error);
@@ -23,8 +20,8 @@ export default function usePlayers(
 	}
 
 	useEffect(() => {
-		fetchPlayers();
-	}, [teamId, season, leagueId]);
+		if (teamId && season) fetchPlayers();
+	}, [teamId, season]);
 
 	return {
 		players,

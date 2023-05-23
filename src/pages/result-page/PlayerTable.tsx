@@ -3,18 +3,17 @@ import Table from '../../components/Table';
 interface FootballPlayer extends Record<string, unknown> {
 	image: string;
 	name: string;
-	age: number;
+	age: string;
 	nationality: string;
-	height: number;
-	weight: number;
+	height: string;
+	weight: string;
 }
 
 interface PlayerResponse {
-	id: number;
 	name: string;
 	firstname: string;
 	lastname: string;
-	age: number;
+	age: string;
 	birth: {
 		date: string;
 		place: string;
@@ -39,6 +38,8 @@ export default function PlayerTable({ data }: PlayerTableProps) {
 	const titles = [' ', 'Nome', 'Idade', 'Nacionalidade', 'Altura', 'Peso'];
 	const columnColors = ['', '#F5950C', '#fff', '#F5950C'];
 
+	console.log(data);
+
 	const footballPlayers = data && getPlayersData(data);
 
 	return (
@@ -59,8 +60,8 @@ function getPlayersData(data: PlayerResponseArray) {
 			name: player.name,
 			age: player.age,
 			nationality: player.nationality,
-			height: Number(player.height.replace(' cm', '')),
-			weight: Number(player.weight.replace(' kg', '')),
+			height: player.weight ? player.height.replace(' cm', '') : 'n.d',
+			weight: player.weight ? player.weight.replace(' kg', '') : 'n.d',
 		};
 		return newPlayer;
 	});
