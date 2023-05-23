@@ -9,6 +9,7 @@ interface ChoiceCardProps {
 	setChoice: (choice: string) => void;
 	setChoiceId?: (choiceId: string) => void;
 	ids?: string[];
+	choice: string;
 }
 
 export default function ChoiceCard({
@@ -18,6 +19,7 @@ export default function ChoiceCard({
 	setChoice,
 	setChoiceId,
 	ids,
+	choice,
 }: ChoiceCardProps) {
 	const [selected, setSelected] = useState(false);
 
@@ -43,7 +45,8 @@ export default function ChoiceCard({
 				{choices.length > 0 && (
 					<StyledSelect
 						onChange={handleOptionSelect}
-						selected={selected}>
+						selected={selected}
+						value={choice}>
 						<option value=''>Selecione</option>
 						{choices.map((choice, index) => (
 							<option

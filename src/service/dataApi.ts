@@ -39,3 +39,7 @@ export async function getPlayers(teamId: string, season: string) {
 		})
 	);
 }
+
+export async function checkKey() {
+	return await handleRequest(() => api.get(`v3/leagues/seasons`));
+}

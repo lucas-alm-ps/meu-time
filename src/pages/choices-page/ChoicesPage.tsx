@@ -45,8 +45,6 @@ export default function ChoicesPage() {
 		!countryLoading &&
 		leagueOptionsId.includes(selectedLeagueId);
 
-	console.log(leagueOptionsId, selectedLeagueId);
-
 	return (
 		<MainPage>
 			<ChoiceCard
@@ -54,6 +52,7 @@ export default function ChoicesPage() {
 				choices={countryOptions}
 				instruction='Selecione o país desejado'
 				setChoice={setSelectedCountry}
+				choice={selectedCountry}
 			/>
 			{seasonLoading && <Spinner />}
 
@@ -63,6 +62,7 @@ export default function ChoicesPage() {
 					choices={seasonOptions}
 					instruction='Selecione a temporada desejada'
 					setChoice={setSelectedSeason}
+					choice={selectedSeason}
 				/>
 			)}
 
@@ -76,6 +76,7 @@ export default function ChoicesPage() {
 					setChoice={setSelectedLeague}
 					setChoiceId={setSelectedLeagueId}
 					ids={leagueOptionsId}
+					choice={selectedLeague}
 				/>
 			) : null}
 
@@ -89,6 +90,7 @@ export default function ChoicesPage() {
 					setChoice={setSelectedTeam}
 					setChoiceId={setSelectedTeamId}
 					ids={teamOptionsId}
+					choice={selectedTeamId}
 				/>
 			) : null}
 		</MainPage>

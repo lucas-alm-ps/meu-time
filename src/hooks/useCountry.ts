@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getCountries } from '../service/dataApi';
+import ApiKeyContext from '../context/ApiKeyContext';
 
 interface Country {
 	name: string;
@@ -10,9 +11,10 @@ interface Country {
 export default function useCountry() {
 	const [selectedCountry, setSelectedCountry] = useState('');
 	const [countryOptions, setCountryOptions] = useState<string[]>([]);
-	const [data, setData] = useState<Country[]>([]);
+	const [, setData] = useState<Country[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
+	const { isAuthenticated } = useContext(ApiKeyContext);
 
 	async function fetchCountries() {
 		try {
@@ -31,7 +33,7 @@ export default function useCountry() {
 	}
 
 	useEffect(() => {
-		fetchCountries();
+		if (isAuthenticated) fetchCountries();
 	}, []);
 
 	return {

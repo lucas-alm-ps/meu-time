@@ -14,6 +14,7 @@ export default function Input({ inputValue, setInputValue }: InputProps) {
 			<StyledInput
 				type='text'
 				value={inputValue}
+				defaultValue={inputValue}
 				onChange={handleInputChange}
 				placeholder='XxXxXxXxXxXxXxXxX'
 			/>

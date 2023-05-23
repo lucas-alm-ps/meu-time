@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getTeamsByLeague } from '../service/dataApi';
+import ApiKeyContext from '../context/ApiKeyContext';
 
 interface TeamProps {
 	selectedLeagueId: string;
@@ -27,8 +28,7 @@ export default function useTeam({
 	const [error, setError] = useState<Error | null>(null);
 	const [selectedTeamId, setSelectedTeamId] = useState('');
 	const [ids, setIds] = useState<string[]>([]);
-
-	console.log(selectedTeamId);
+	const { isAuthenticated } = useContext(ApiKeyContext);
 
 	async function fetchTeams() {
 		try {
@@ -52,7 +52,7 @@ export default function useTeam({
 	}
 
 	useEffect(() => {
-		if (selectedLeagueId && selectedSeason) fetchTeams();
+		if (selectedLeagueId && selectedSeason && isAuthenticated) fetchTeams();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedLeagueId, selectedSeason]);
 

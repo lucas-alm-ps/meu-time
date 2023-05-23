@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getTeamStats } from '../service/dataApi';
+import ApiKeyContext from '../context/ApiKeyContext';
 
 export default function useStatistics(
 	selectedLeagueId: string,
@@ -12,6 +13,7 @@ export default function useStatistics(
 	const [minutesGoalsPercentage, setMinutesGoalsPercentage] = useState({});
 	const [lineups, setLineups] = useState([]);
 	const [fixtures, setFixtures] = useState({});
+	const { isAuthenticated } = useContext(ApiKeyContext);
 
 	async function fetchStatistics() {
 		try {
@@ -40,7 +42,12 @@ export default function useStatistics(
 	}
 
 	useEffect(() => {
-		if (selectedTeamId && selectedLeagueId && selectedSeason) {
+		if (
+			selectedTeamId &&
+			selectedLeagueId &&
+			selectedSeason &&
+			isAuthenticated
+		) {
 			fetchStatistics();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -11,9 +11,13 @@ import ApiKeyContext from '../../context/ApiKeyContext';
 import { Navigate } from 'react-router-dom';
 
 export default function LoginPage() {
-	const [error] = useState(null);
+	const [inputValue, setInputValue] = useState('');
 
-	const { setApiKey, apiKey, isAuthenticated } = useContext(ApiKeyContext);
+	const {
+		setApiKey,
+		isAuthenticated,
+		error: apiKeyError,
+	} = useContext(ApiKeyContext);
 
 	if (isAuthenticated) {
 		return <Navigate to='/choose' />;
@@ -27,9 +31,16 @@ export default function LoginPage() {
 						Explore o mundo do futebol em <span>um só lugar</span>
 					</MainText>
 					<Instruction>Insira sua chave da API-Football</Instruction>
-					<Input inputValue={apiKey} setInputValue={setApiKey} />
-					{error && <ErrorMessage>{error}</ErrorMessage>}
-					<Button text='Entrar' handleClick={() => {}} />
+					<Input
+						inputValue={inputValue}
+						setInputValue={setInputValue}
+					/>
+					{apiKeyError && (
+						<ErrorMessage>
+							Parece que sua chave não é válida!
+						</ErrorMessage>
+					)}
+					<Button text='Entrar' handleClick={handleClick} />
 				</LeftSide>
 
 				<RightSide>
@@ -38,6 +49,10 @@ export default function LoginPage() {
 			</Page>
 		</MainPage>
 	);
+
+	async function handleClick() {
+		setApiKey(inputValue);
+	}
 }
 
 const Page = styled(StyledPage)`

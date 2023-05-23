@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React from 'react';
-import { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { checkKey } from '../service/dataApi';
+import { configureApiHeader } from '../service/api';
 
 interface ApiKeyContent {
 	apiKey: string;
 	setApiKey: (apiKey: string) => void;
 	isAuthenticated: boolean;
+	error: Error | null;
 }
 
 const ApiKeyContext = createContext<ApiKeyContent>({
 	apiKey: '',
 	setApiKey: () => {},
 	isAuthenticated: false,
+	error: null,
 });
-export default ApiKeyContext;
 
 interface ApiKeyProviderProps {
 	children: React.ReactNode;
@@ -21,47 +23,61 @@ interface ApiKeyProviderProps {
 
 export function ApiKeyProvider({ children }: ApiKeyProviderProps) {
 	const [apiKey, setApiKey] = useState('');
-	const [executeEffect, setExecuteEffect] = useState(false);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [error, setError] = useState<Error | null>(null);
+	const [initializing, setInitializing] = useState(true);
 
 	useEffect(() => {
-		if (executeEffect) {
-			localStorage.setItem('apiKey', apiKey);
-			setIsAuthenticated(isApiKeyValid(apiKey));
-			setExecuteEffect(false);
-		} else {
-			setExecuteEffect(true);
-		}
+		if (initializing || !apiKey) return;
+		configureApiHeader(apiKey);
+		fetchApiKey();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [apiKey]);
 
 	useEffect(() => {
-		const savedApiKey = loadApiKey();
-		if (savedApiKey) {
-			setApiKey(savedApiKey);
-		} else {
-			console.log('No api key found');
+		if (initializing) {
+			const savedApiKey = loadApiKey();
+			if (!savedApiKey) {
+				console.log('No api key found on env file');
+			} else {
+				setApiKey(savedApiKey);
+			}
+			setInitializing(false);
 		}
-	}, []);
+	}, [initializing]);
+
+	async function fetchApiKey() {
+		try {
+			console.log('Checking api key on server');
+			const response = await isApiKeyValid();
+			setIsAuthenticated(response);
+		} catch (err) {
+			console.error('Error', err);
+			setIsAuthenticated(false);
+			setError(err as Error);
+		}
+	}
 
 	return (
-		<ApiKeyContext.Provider value={{ apiKey, setApiKey, isAuthenticated }}>
+		<ApiKeyContext.Provider
+			value={{ apiKey, setApiKey, isAuthenticated, error }}>
 			{children}
 		</ApiKeyContext.Provider>
 	);
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function loadApiKey() {
-	const apiKey = localStorage.getItem('apiKey');
-	if (import.meta.env.VITE_DEV_MODE === 'true') {
+	if (
+		typeof import.meta.env.VITE_DEV_MODE !== undefined &&
+		import.meta.env.VITE_DEV_MODE === 'true'
+	) {
 		return import.meta.env.VITE_API_KEY;
 	}
-	return apiKey;
+	return '';
 }
 
-function isApiKeyValid(apiKey: string): boolean {
-	if (apiKey.length === 0) return false;
-	// add api call to check status of api key
-	return true;
+async function isApiKeyValid() {
+	return await checkKey();
 }
+
+export default ApiKeyContext;

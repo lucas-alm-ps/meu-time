@@ -5,7 +5,6 @@ import ResultPage from './pages/result-page/ResultPage';
 import { ChoiceProvider } from './context/ChoiceContext';
 import { ApiKeyProvider } from './context/ApiKeyContext';
 import ProtectedRoute from './routes/ProtectedRoute';
-import React from 'react';
 
 export default function App() {
 	return (
@@ -14,14 +13,21 @@ export default function App() {
 				<BrowserRouter>
 					<Routes>
 						<Route path='/' Component={LoginPage} />
-						<Route path='/choose' Component={ChoicesPage} />
-						<Route path='/result' Component={ResultPage} />
 						<Route
-							path='/prot'
+							path='/choose'
 							element={
 								<ProtectedRoute
 									authenticationPath='/'
 									outlet={<ChoicesPage />}
+								/>
+							}
+						/>
+						<Route
+							path='/result'
+							element={
+								<ProtectedRoute
+									authenticationPath='/'
+									outlet={<ResultPage />}
 								/>
 							}
 						/>

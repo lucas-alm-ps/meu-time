@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { getLeaguesByCountry } from '../service/dataApi';
 import ChoiceContext from '../context/ChoiceContext';
+import ApiKeyContext from '../context/ApiKeyContext';
 
 interface League {
 	id: number;
@@ -20,6 +21,7 @@ export default function useLeague(selectedCountry: string) {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
 	const [ids, setIds] = useState<string[]>([]);
+	const { isAuthenticated } = useContext(ApiKeyContext);
 
 	async function fetchLeagues() {
 		try {
@@ -38,7 +40,7 @@ export default function useLeague(selectedCountry: string) {
 	}
 
 	useEffect(() => {
-		if (selectedCountry !== '') fetchLeagues();
+		if (selectedCountry !== '' && isAuthenticated) fetchLeagues();
 	}, [selectedCountry]);
 
 	useEffect(() => {

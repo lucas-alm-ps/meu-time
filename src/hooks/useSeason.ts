@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getSeasons } from '../service/dataApi';
+import ApiKeyContext from '../context/ApiKeyContext';
 
 export default function useSeason() {
 	const [selectedSeason, setSelectedSeason] = useState('');
@@ -7,6 +8,7 @@ export default function useSeason() {
 	const [, setData] = useState<string[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<Error | null>(null);
+	const { isAuthenticated } = useContext(ApiKeyContext);
 
 	async function fetchSeasons() {
 		try {
@@ -23,7 +25,7 @@ export default function useSeason() {
 	}
 
 	useEffect(() => {
-		fetchSeasons();
+		if (isAuthenticated) fetchSeasons();
 	}, []);
 
 	return {
