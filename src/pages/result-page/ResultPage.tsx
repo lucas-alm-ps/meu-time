@@ -20,6 +20,10 @@ export default function ResultPage() {
 		selectedSeason,
 		setSelectedTeam,
 		setSelectedTeamId,
+		setSelectedCountry,
+		setSelectedLeagueId,
+		setSelectedLeague,
+		setSelectedSeason,
 	} = useContext(ChoiceContext);
 
 	const { fixtures, statisticsLoading, minutesGoalsPercentage, lineups } =
@@ -63,8 +67,13 @@ export default function ResultPage() {
 	}
 
 	function resetSearch() {
+		console.log('reset');
 		setSelectedTeamId('');
 		setSelectedTeam('');
+		setSelectedCountry('');
+		setSelectedLeague('');
+		setSelectedLeagueId('');
+		setSelectedSeason('');
 	}
 }
 

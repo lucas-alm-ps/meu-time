@@ -49,7 +49,7 @@ export default function ChoiceCard({
 							<option
 								value={choice}
 								key={index}
-								id={ids && ids[index]}>
+								id={ids && ids[index - 1]}>
 								{choice}
 							</option>
 						))}

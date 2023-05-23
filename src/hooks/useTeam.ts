@@ -28,6 +28,8 @@ export default function useTeam({
 	const [selectedTeamId, setSelectedTeamId] = useState('');
 	const [ids, setIds] = useState<string[]>([]);
 
+	console.log(selectedTeamId);
+
 	async function fetchTeams() {
 		try {
 			setLoading(true);
@@ -38,6 +40,7 @@ export default function useTeam({
 			console.log(response);
 			const teams = response.map((item: any) => item.team.name);
 			const ids = response.map((item: any) => String(item.team.id));
+			console.log(ids);
 			setData(response);
 			setTeamOptions(teams);
 			setIds(ids);

@@ -1,10 +1,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import ChoiceCard from '../../components/ChoiceCard';
 import ChoiceContext from '../../context/ChoiceContext';
 import MainPage from '../main-page/MainPage';
 import Spinner from '../../components/Spinner';
 import { Navigate } from 'react-router-dom';
+import { count } from 'console';
 
 export default function ChoicesPage() {
 	const {
@@ -40,9 +41,11 @@ export default function ChoicesPage() {
 		selectedCountry &&
 		selectedSeason &&
 		selectedLeague &&
-		!countryLoading &&
 		!leagueLoading &&
+		!countryLoading &&
 		leagueOptionsId.includes(selectedLeagueId);
+
+	console.log(leagueOptionsId, selectedLeagueId);
 
 	return (
 		<MainPage>
